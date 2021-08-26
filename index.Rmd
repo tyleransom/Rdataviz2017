@@ -20,6 +20,8 @@ showtext::showtext.opts(dpi = 300)
 ```
 
 ```{r loadbib, echo=FALSE, cache=FALSE}
+library(tidyverse)
+library(showtext)
 library(RefManageR)
 bib = ReadBib("references.bib", check = FALSE)
 BibOptions(check.entries = FALSE, style = "markdown",
@@ -289,107 +291,6 @@ OK, enough setup -- let's run through an example of using ggplot.
 
 ---
 
-# The data
-
-* [WHO Global Health Observatory](www.who.int/gho/en/)
-* Example:
-
-```{r whodataexample, eval=FALSE}
-library(WHO)
-codes <- get_codes()
-who_data <- get_data("WHS9_CBR")
-```
-
-```{r getcodes, cache=TRUE, echo=FALSE, message=FALSE}
-library(WHO)
-codes <- get_codes(extra = TRUE)
-```
-
-```{r exploredata, echo=FALSE, eval=FALSE}
-categoryWHOcodes <- function(who_cat, all_codes) {
-	as.data.frame(subset(all_codes,
-						 category==who_cat,
-						 select = c(label, display)))
-}
-
-unique(codes$category)
-
-categoryWHOcodes("Demographic and socioeconomic statistics", codes)
-categoryWHOcodes("Injuries and violence", codes)
-categoryWHOcodes("Sustainable development goals", codes)
-categoryWHOcodes("Mortality and global health estimates", codes)
-```
-
-```{r grabdata, echo=FALSE, cache=TRUE}
-getWHOdataByLabels <- function(who_labels) {
-	who_data = lapply(who_labels, get_data)
-	names(who_data) = who_labels
-	# remove empty datasets
-	no_data = (lapply(who_data, nrow)==0)
-	if(any(no_data)) {
-		who_data = who_data[-unname(which(no_data))]
-	}
-	return(who_data)
-}
-
-labelWHOcodes <- function(selected_labels, all_codes) {
-	as.data.frame(subset(all_codes,
-						 label%in%selected_labels,
-						 select = c(label, display)))
-}
-makeWHOnamevec <- function(selected_labels, all_codes) {
-	selected_codes <- labelWHOcodes(selected_labels, all_codes)
-	# make a name lookup table
-	selected_names = selected_codes$display
-	names(selected_names) = selected_codes$label
-	return(selected_names)
-}
-
-data_labels = c("WHS9_CBR", "WHS9_CDR", "MDG_0000000001", "MDG_0000000026", "WHS2_126")
-
-who_data = getWHOdataByLabels(data_labels)
-who_names = makeWHOnamevec(names(who_data), codes)
-```
-
-```{r cleandata, echo=FALSE, cache=TRUE, warning=FALSE, message=FALSE}
-library(dplyr)
-
-splitValueCol = function(df_col, split_on) {
-	bind_rows(lapply(df_col, function(x) as.data.frame(t(as.numeric(unlist(strsplit(split = split_on, x)))))))
-}
-splitValueColNames = c("value", "value_lower", "value_upper")
-
-who_data[["MDG_0000000001"]][,splitValueColNames] <- splitValueCol(
-	as.data.frame(who_data[["MDG_0000000001"]])$value,
-	"[[:space:]]\\[|-|\\]")
-
-# get rid of pesky spaces
-who_data[["MDG_0000000026"]]$value = gsub("(\\d+)\\s+(\\d+)", "\\1\\2", who_data[["MDG_0000000026"]]$value)
-who_data[["MDG_0000000026"]][,splitValueColNames] <- splitValueCol(
-	as.data.frame(who_data[["MDG_0000000026"]])$value,
-	"[[:space:]]\\[[[:space:]]|[[:space:]]-[[:space:]]+|\\]")
-
-# quick and dirty way to make all strings into factors
-who_data = lapply(who_data, function(x) as.data.frame(unclass(x)))
-
-who_cbdr = merge(who_data[["WHS9_CBR"]], who_data[["WHS9_CDR"]],
-				 by = c("year", "worldbankincomegroup", "country", "region"),
-				 all = TRUE,
-				 suffixes = c(".birthsper1000",".deathsper1000"))
-
-who_mort = merge(who_data[["MDG_0000000001"]], who_data[["MDG_0000000026"]],
-				 by = c("year", "country", "region"),
-				 all = TRUE,
-				 suffixes = c(".infant", ".maternal"))
-who_mort[,c("value.infant", "value_lower.infant", "value_upper.infant")] = who_mort[,c("value.infant", "value_lower.infant", "value_upper.infant")]/1000
-who_mort[,c("value.maternal", "value_lower.maternal", "value_upper.maternal")] = who_mort[,c("value.maternal", "value_lower.maternal", "value_upper.maternal")]/100000
-
-# http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=90
-who_yllmajorcause = as.data.frame(subset(who_data[["WHS2_126"]], year==2012) %>%
-						   group_by(region, ghecauses) %>%
-						   summarise(med.pct = median(value)))
-```
-
 * Alternatively, use data that ships with `ggplot2`:
     + [diamonds](http://docs.ggplot2.org/current/diamonds.html),
     + [mpg](http://docs.ggplot2.org/current/mpg.html),
@@ -401,27 +302,6 @@ who_yllmajorcause = as.data.frame(subset(who_data[["WHS2_126"]], year==2012) %>%
 * For the majority of the examples in this presentation, I'm going to use data acquired via the WHO R package. This package just downloads data via the World Health Organization's (WHO) Global Health Observatory (GHO) public API.
 * If you would rather not go to this trouble, ggplot2 ships with several good datasets that you can use instead -- a few of them are listed here. You can try your hand with one of those if you want some practice.
 
----
-
-# A simple scatterplot
-
-```{r simple_scatterplot0, message=FALSE, eval=FALSE}
-library(ggplot2)
-p = ggplot(data = subset(who_cbdr, !is.na(country)),
-		aes(x = value.birthsper1000,
-			y = value.deathsper1000,
-			color = worldbankincomegroup)) +
-	geom_point()
-p
-```
-
-???
-
-* This is a simple example to get us started. If you've used ggplot before, this plot will probably be pretty boring for you, but we'll start here and make things more complicated in a moment.
-* Here we have DATA which is the result of merging two datasets downloaded from the World Health Organization's (WHO) Global Health Observatory (GHO).
-* For 193 countries, we have both crude birth rate per 1,000 people and crude mortality rate per 1,000 people in a single year -- 2013.
-* We also have the World Bank income group and global region for each of these countries.
-* Each row in the data is an observation, as we''ve defined it for this problem -- a single country. Each column is a variable. This data is tidy, at least for how we choose to represent it now -- but there are other ways to structure it.
 
 ---
 
@@ -438,31 +318,6 @@ class: fullscreen, middle, center
 * All that said, this is not a finished product.  We can tell that there is a pattern in the data, but to me, this plot raises more questions than it answers.
 * I'm not going to dwell too much on what a good versus bad plot is -- that's a whole separate topic that others can cover better than I can -- but I just wanted to point that out here as a segue to the next few graphics.
 
----
-
-# Reorder a group aesthetic
-
-```{r levels_scatterplot}
-levels(who_cbdr$worldbankincomegroup)
-```
-
-```{r grouporder_scatterplot0, eval=FALSE}
-# reorder factor levels
-who_cbdr$worldbankincomegroup = factor(
-	who_cbdr$worldbankincomegroup,
-	levels = levels(who_cbdr$worldbankincomegroup)[c(2, 5:3, 1)],
-	labels = c("High", "Upper-middle", "Lower-middle", "Low", "Global"))
-
-# recreate plot with modifed data
-p = p %+% subset(who_cbdr, !is.na(country))
-p
-```
-
-???
-
-* One of the first things that sticks out at me in the previous plot is the ordering of the groups in the legend. The groups are in alphabetical order, which is the default for ggplot given no other information.
-* Let's change the ordering to something more sensible: high, upper-middle, lower-middle, and then low.  There's an additional level in the data, Global, which represents summaries and isn't used in this scatterplot. We can put it last.
-* Then we'll use this special addition operator provided by ggplot2 that allows us to switch out the original data for the plot with new data. Plot objects store the data, so even though we've changed the data frame in our R session, ggplot won't know about those changes unless we tell it to use the new data.
 
 ---
 
@@ -474,34 +329,6 @@ class: fullscreen, middle, center
 ???
 
 * As you can see, the legend is now ordered differently, and so the colors assigned to each group have changed, as well. Now the pattern in the data is a little easier to read, since, from left to right, the colors of the majority of the points generally go in the same order as they're displayed in the legend, from high income to low income.
-
----
-
-# Add labels
-
-```{r label_scatterplot0, eval=FALSE}
-p = p +
-	xlab("Crude birth rate") +
-	ylab("Crude death rate") +
-	labs(title = "Global population rates",
-		 subtitle = "2013; per 1,000 population",
-		 caption = "Source: UN World Population Prospects (https://esa.un.org/unpd/wpp/)") +
-	theme(plot.title = element_text(hjust = 0.5),
-		  plot.subtitle = element_text(hjust = 0.5),
-		  plot.caption = element_text(size = 8))
-p
-```
-
-* `ggtitle()` can instead be used to set the title and subtitle
-* `scale_x_*()` and `scale_y_*()` can instead be used to set the x and y axis labels, respectively.
-* As of ggplot2 v2.2.0, title(s) are left-aligned by default.
-
-???
-
-* Because it''s just good practice and is pretty critical to understanding a data visualization, let's add some labels to each axis and a title, subtitle, and data source caption to the graph.
-* There are multiple ways to specify most labels in ggplot. This is just one option that seemed most efficient for this situation. Since we aren't changing other aspects of the x and y axis, I used `xlab()` and `ylab()` instead of the `scale_x_continuous()` and `scale_y_continuous()` functions. Likewise, because we're setting a caption here as well as a title and subtitle, I used `labs()` instead of `ggtitle()`, since `ggtitle()` can't set captions.
-* Since newer versions of ggplot left-align titles, we're manually centering them via the `theme()` function.
-* Also, subtitles and captions are new as of ggplot2 v2.2.0.
 
 ---
 
@@ -518,13 +345,6 @@ class: fullscreen, middle, center
 
 # Improve legend and colors
 
-```{r legend_scatterplot0, eval=FALSE}
-p = p +
-	scale_colour_brewer("World Bank Income Group",
-						palette = "Dark2") +
-	theme(legend.position = "bottom")
-p
-```
 
 * For discrete/qualitative color schemes: `scale_colour_hue()`, `scale_colour_discrete()`, `scale_colour_brewer()`, `scale_colour_grey()`, `scale_colour_manual()`, `scale_colour_identity()`
 * For continuous (sequential or diverging) color schemes: `scale_colour_continuous()`, `scale_colour_distiller()`, `scale_colour_gradient()`, `scale_colour_gradient2()`, `scale_color_gradientn()`, `scale_colour_date()`, `scale_colour_datetime()`
@@ -572,15 +392,6 @@ class: fullscreen, middle, center
 
 # Add a summary (or two)
 
-```{r summary_scatterplot0, eval=FALSE}
-p = p +
-	stat_ellipse(type = "t", level = 0.9,
-				 segments = 80, alpha = 0.5) +
-	geom_smooth(aes(color = NULL), method = "loess",
-	 			span = 0.6, se = FALSE,
-	 			color = "grey40", linetype = "longdash")
-p
-```
 
 * An alternative way to map an aesthetic to only some layers: specify the mapping in each layer but not in the call to `ggplot`.
 
@@ -608,7 +419,6 @@ class: fullscreen, middle, center
 
 ```{r theme_scatterplot0, eval=FALSE}
 old_theme = theme_set(theme_minimal(base_size = 14))
-p
 ```
 
 * Theme options: `theme_gray()`, `theme_bw()`, `theme_linedraw()`, `theme_light()`, `theme_dark()`, `theme_minimal()`, `theme_classic()`, `theme_void()`
@@ -650,14 +460,6 @@ class: fullscreen, middle, center
 ---
 
 # Tweak the theme and text
-
-```{r font_scatterplot0, eval=FALSE}
-library(showtext)
-sysfonts::font.add.google("Open Sans", "open_sans")
-showtext::showtext.auto()
-p = p + theme(text = element_text(family = "open_sans"))
-p
-```
 
 * To use a font installed on the local system, call `font.add()` instead.
 * Can instead set font via `base_family` argument of any `theme_*()` function.
@@ -715,30 +517,6 @@ class: fullscreen, middle, center
 * The packages listed here on the left are for changing fonts on regular text and/or making sure that text renders the way you want it to in your output file. `extrafont` is kind of the original package in this arena, and it works great, but it requires a little more work to get it going, so I went with the simpler example for this presentation.
 * On the right, you'll see some packages that allow you to use emoji and custom icons or images, mostly as plot markers rather than in place of text. For example, the ggflags package allows you to use country flags as markers in a scatterplot.
 
----
-
-# Label observations of interest
-
-```{r labelobs_scatterplot0, eval=FALSE}
-library(dplyr)
-library(ggrepel)
-p = p + geom_label_repel(data = subset(who_cbdr,
-									   !is.na(country)) %>%
-			group_by(worldbankincomegroup) %>%
-			top_n(3, abs(scale(value.birthsper1000)) +
-			  		 abs(scale(value.deathsper1000))),
-		aes(label = country),
-		show.legend = FALSE,
-		size = 3.5,
-		alpha = 0.65,
-		box.padding = unit(0.6, "lines"),
-    	point.padding = unit(0.4, "lines"),
-    	segment.color = "grey50",
-    	segment.alpha = 0.65)
-p
-```
-
-* For a pure `ggplot2` solution, try `geom_label()` or `geom_text()` with `nudge_x` and/or `nudge_y` arguments
 
 ---
 
@@ -763,169 +541,7 @@ new_theme = theme_set(old_theme)
 
 ???
 
----
 
-# A heatmap with `ggplot2`
-
-```{r heatmap0, results='asis', message=FALSE, eval=FALSE}
-wrap_labels = function(x, width = 15) {
-	wrapped = strwrap(x, width = width, simplify = FALSE)
-	lapply(wrapped, paste, collapse = "\n")
-}
-
-p1 = ggplot(who_yllmajorcause,
-			aes(x = ghecauses, y = region, fill = med.pct)) +
-	geom_tile() +
-	scale_fill_distiller("Percent of total",
-						 palette = "Blues",
-						 direction = 1,
-						 breaks = seq(0, 100, 25),
-						 limits = c(0, 100),
-						 guide = guide_colorbar(barwidth = 15,
-						 						barheight = 1)) +
-	scale_x_discrete("Cause Group", expand = c(0, 0),
-					 labels = wrap_labels) +
-	scale_y_discrete("Region", expand = c(0, 0),
-					 labels = wrap_labels) +
-	ggtitle("Median percent of years of life lost",
-			subtitle = "in 2012 by cause and region") +
-	theme_minimal(base_size = 16) +
-	theme(legend.position = "bottom",
-		  plot.title = element_text(hjust = 0.5),
-		  plot.subtitle = element_text(hjust = 0.5))
-p1
-```
-
-???
-
-* Note that there is a package called `gplots` with a function called `heatmap.2`: this is commonly used to make heatmaps with dendrograms but is not the same as `ggplot`.
-* expand argument on scale_x_discrete and scale_y_discrete ensures that there is no margin inside the plot - the tiles run all the way to the edge
-* the labels argument accepts a mapping between new labels and old labels or a function
-
----
-
-class: fullscreen, middle, center
-
-```{r heatmap1, ref.label="heatmap0", message=FALSE, echo=FALSE, cache=FALSE}
-```
-
-
----
-
-# Creating a dendrogram with `ggdendro`
-
-```{r dendro0, results='asis', message=FALSE, eval=FALSE}
-library(tidyr)
-library(ggdendro)
-
-who_yllmajorcause_mat = who_yllmajorcause %>%
-						spread(region, med.pct) # long --> wide
-
-rownames(who_yllmajorcause_mat) = who_yllmajorcause_mat[,"ghecauses"]
-col_idx = which(colnames(who_yllmajorcause_mat)=="ghecauses")
-who_yllmajorcause_mat = as.matrix(who_yllmajorcause_mat[, -col_idx])
-
-yll_hc = hclust(dist(t(who_yllmajorcause_mat)), "average")
-# plot the raw dendrogram
-ggdendrogram(yll_hc, rotate = TRUE)
-```
-
-???
-
-* transform the data frame from long to wide using tidyr::spread
-* do a little housekeeping to get a matrix that the dist() function will like
-* hierarchical clustering (hclust()) on the distances using average or UPGMA agglomeration method
-* create a dendrogram and rotate it so that the branches are horizontal, not vertical (corresponding with rows of heatmap)
-
----
-
-class: fullscreen, middle, center
-
-```{r dendro1, ref.label="dendro0", message=FALSE, echo=FALSE, cache=FALSE}
-```
-
----
-
-# Simplifying the dendrogram
-
-```{r simpledendro0, results='asis', message=FALSE, eval=FALSE}
-library(grid) # unit
-
-yll_dendro = as.dendrogram(yll_hc)
-yll_ddata = dendro_data(yll_dendro)
-
-p2 = ggplot(segment(yll_ddata)) +
-		geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) +
-		coord_flip() +
-		theme_dendro()
-p2
-```
-
----
-
-class: fullscreen, middle, center
-
-```{r simpledendro1, ref.label="simpledendro0", message=FALSE, echo=FALSE, cache=FALSE}
-```
-
----
-
-# Heatmap, reordered
-
-```{r heatmap0ro, results='asis', message=FALSE, eval=FALSE}
-# just in case there are extra factor levels, etc., un-factor
-old_levels = levels(who_yllmajorcause$region)
-who_yllmajorcause$region = as.character(who_yllmajorcause$region)
-
-# re-factor with clustering/dendrogram ordering
-new_order = order.dendrogram(yll_dendro)
-who_yllmajorcause$region = factor(who_yllmajorcause$region,
-								  old_levels[new_order])
-
-# recreate heatmap with modifed data
-p1 = p1 %+% who_yllmajorcause
-p1
-```
-
----
-
-class: fullscreen, middle, center
-
-```{r heatmap1ro, ref.label="heatmap0ro", message=FALSE, echo=FALSE, cache=FALSE}
-```
-
----
-
-# Putting it all together
-
-```{r heatmapdendro0, results='asis', message=FALSE, eval=FALSE}
-library(gtable)
-
-### dendrogram grob
-# tweak these if the dendrogram doesn't line up:
-dendro_margin = grid::unit(c(15, 0, -5, -10), "points")
-p2_grob = ggplotGrob(p2 + theme(plot.margin = dendro_margin))
-
-### heatmap grob
-p1_grob = ggplotGrob(p1)
-
-# add some space for the dendrogram
-g1 = gtable_add_cols(p1_grob, grid::unit(4, "cm"))
-# adjust top ("t") and bottom ("b") if no title/subtitle:
-g = gtable_add_grob(g1,
-					p2_grob,
-	t = 5, b = 6,
-	l = ncol(g1), r = ncol(g1))
-grid.newpage()
-grid.draw(g)
-```
-
----
-
-class: fullscreen, middle, center
-
-```{r heatmapdendro1, ref.label="heatmapdendro0", message=FALSE, echo=FALSE, cache=FALSE}
-```
 
 ---
 
@@ -1044,149 +660,12 @@ class: inverse, middle, center
 - [gganimate](https://github.com/dgrtwo/gganimate): create animated ggplot2 plots
 - [plotly](https://github.com/ropensci/plotly) ([docs](https://plot.ly/r/): Convert `ggplot2` graphics $\rightarrow$ interactive graphics via `ggplotly()` OR create interactive graphics directly with `plot_ly()`, which function via the plot.ly [ggplot2 library](https://plot.ly/ggplot2/) and [R library](https://plot.ly/r/), respectively. Can operate entirely locally (meaning your plot doesn't have to be uploaded to plot.ly's servers and shared with the world).
 
----
-
-# `ggplot2` + `ggiraph`
-
-```{r scatter_revisited0, eval=FALSE}
-p_basic = ggplot(data = subset(who_cbdr, !is.na(country)),
-			 aes(x = value.birthsper1000,
-				 y = value.deathsper1000,
-				 color = worldbankincomegroup)) +
-	scale_colour_brewer("World Bank Income Group",
-				palette = "Dark2") +
-	xlab("Crude birth rate") +
-	ylab("Crude death rate") +
-	labs(title = "Global population rates",
-		 subtitle = "2013; per 1,000 population",
-		 caption = "Source: UN World Population Prospects (https://esa.un.org/unpd/wpp/)") +
-	theme_minimal(base_size = 14) +
-	theme(plot.title = element_text(hjust = 0.5),
-		  plot.subtitle = element_text(hjust = 0.5),
-		  plot.caption = element_text(size = 8),
-		  legend.position = "bottom")
-
-p_basic +
-	geom_point()
-```
 
 ---
 
 class: fullscreen, middle, center
 
 ```{r scatter_revisited1, ref.label="scatter_revisited0", message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE}
-```
-
----
-
-# `ggplot2` + `ggiraph`
-
-```{r scatter_ggiraph0, warning=FALSE}
-# devtools::install_github("davidgohel/ggiraph")
-library(ggiraph)
-
-p_ggiraph = p_basic +
-	geom_point_interactive(
-		aes(tooltip = paste(gsub("'", "&#39;", country),
-							paste(value.birthsper1000,
-								  value.deathsper1000,
-						  		  sep = ", "),
-							sep = ": ")))
-```
-
-* Use `geom_*_interactive()` in place of `geom_*()`
-* Use `tooltip`, `onclick` and `data_id` aesthetics to specify interactivity
-    * `tooltip`: displayed when mouse is over an element.
-	* `onclick`: javascript function to be executed when an element is clicked, such as `paste0("alert(\"", data$x, "\")" )`
-    * `data_id`: id to be associated with elements.
-* `gsub()` is used to substitute the ASCII equivalent for any apostrophes
-
----
-
-# `ggplot2` + `ggiraph`
-
-```{r scatter_ggiraph1a, message=FALSE, eval=FALSE}
-# in an R session, opens in browser
-ggiraph(ggobj = p_ggiraph,
-		width_svg = 8,
-		height_svg = 6,
-		tooltip_opacity = 0.7)
-```
-
-```{r scatter_ggiraph1b, message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE}
-htmlwidgets::saveWidget(ggiraph(ggobj = p_ggiraph, width_svg = 8, height_svg = 6, tooltip_opacity = 0.7),
-	"ggiraph_scatter_plot.html")
-```
-
-### <a href="ggiraph_scatter_plot.html" target="_blank">View visualization in new tab</a>
-
----
-
-# `ggplot` + `plotly`
-
-```{r plotly0, message=FALSE, eval=FALSE}
-library(plotly)
-
-p_plotly = p_basic +
-	geom_point(aes(text = country))
-
-ggplotly(p_plotly)
-```
-
-* Use the `text` aesthetic to add additional information to the tooltips. `ggplot()` may complain about this but `ggplotly()` understands it.
-
-???
-
-* Start with the static ggplot
-* Note that graphics are NO LONGER uploaded to plot.ly and are **public** by default.
-* Also, the conversion does not always go as planned.  Sometimes the ggplotly function will reject the ggplot object with a cryptic error message. Sometimes it will convert it, but it will not look sensible. The tooltips are also not as helpful as they could be -- but there are apparently cumbersome ways to hack them. Your mileage may vary.
-
-
----
-
-class: fullscreen, middle, center
-
-```{r plotly1, ref.label="plotly0", out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE}
-```
-
----
-class: inverse, middle, center
-
-# `htmlwidgets`: Interactive data visualization framework in R
-
----
-
-# `htmlwidgets` for interactive graphics in R
-
-- `htmlwidgets` provides the framework on which most of the interactive plotting packages in R rely (if they use JavaScript plotting libraries on the backend).
-- [package source](https://github.com/ramnathv/htmlwidgets), [docs](http://www.htmlwidgets.org/), [gallery](http://gallery.htmlwidgets.org/)
-- Advanced usage may require knowledge/use of JavaScript.
-
----
-
-# `DT`
-
-```{r dt0, out.width='100%', eval=FALSE}
-library(DT)
-dont_show_cols = which(grepl("^gho|^publish",
-							 colnames(who_cbdr)))
-datatable(who_cbdr[,-dont_show_cols],
-		  caption = "Global population rates in 2013 per 1,000 population",
-		  rownames = FALSE,
-		  colnames = c("World Bank Income Group" = 2,
-		  			   "Crude birth rate" = 5,
-		  			   "Crude death rate" = 6),
-		  options = list(pageLength = 5,
-		  				 lengthMenu = c(5, 10, 15)))
-```
-
-* Uses the [DataTables](https://datatables.net/) JavaScript library
-
----
-
-class: fullscreen, middle, center
-
-```{r dt1, ref.label="dt0", out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE}
 ```
 
 ---
@@ -1216,75 +695,6 @@ class: fullscreen, middle, center
 ```{r simple_leaflet1, ref.label="simple_leaflet0", out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE}
 ```
 
----
-
-# `leaflet`
-
-```{r prep_fancy_leaflet, echo=FALSE, cache=TRUE, message=FALSE, warning=FALSE}
-library(jsonlite)
-json_url = "https://raw.githubusercontent.com/mledoze/countries/master/countries.json"
-countryinfo = readLines(json_url, warn = FALSE) %>%
-    paste(collapse = "\n") %>%
-    fromJSON(simplifyVector = FALSE)
-
-name_names = c("common", "official")
-country_names <- sapply(countryinfo, function(country) {
-    country$name[name_names]
-})
-country_names = data.frame(t(country_names))
-
-yll_bycondition = subset(who_data[["WHS2_126"]],
-                     year==2012&ghecauses=="Communicable & other Group I")
-
-name_dists = lapply(as.list(country_names),
-    function(x) adist(as.character(yll_bycondition$country), x, partial = TRUE, ignore.case = TRUE))
-
-closest_name = apply(sapply(name_dists, apply, 1, min), 1, which.min)
-min_name_dist_idx = sapply(name_dists, apply, 1, which.min)
-closest_name_idx = as.vector(sapply(seq_along(closest_name),
-                                    function(i) min_name_dist_idx[i,closest_name[i]]))
-
-bad_matches = c("Macedonia", "Brunei", "Iran")
-bad_match_who_idx = sapply(bad_matches, grep, yll_bycondition$country)
-bad_match_ref_idx = sapply(bad_matches, grep, country_names$common)
-closest_name_idx[bad_match_who_idx] = bad_match_ref_idx
-
-name_matches = as.data.frame(cbind(country_names[closest_name_idx,], as.character(yll_bycondition$country)))
-names(name_matches) = c(paste("countries", name_names, sep = "_"), "who")
-
-# name_matches[apply(sapply(name_dists, apply, 1, min), 1, min) > 0,]
-# who countries with incorrect matches are fixed above
-
-country_latlng = sapply(countryinfo, `[[`, "latlng") %>% sapply(unlist)
-country_latlng[sapply(country_latlng, is.null)] = NA
-country_latlng = as.data.frame(do.call(rbind, country_latlng))
-names(country_latlng) = c("latitude", "longitude")
-yll_bycondition = as.data.frame(cbind(yll_bycondition, country_latlng[closest_name_idx,]))
-```
-
-```{r preview_fancy_leaflet}
-head(subset(yll_bycondition,
-            select = c(country, longitude, latitude, value)), 2)
-```
-
-```{r fancy_leaflet0, eval=FALSE}
-pal = colorNumeric(palette = "plasma",
-                   domain = yll_bycondition$value)
-
-yll_bycondition$popup_label = paste0(yll_bycondition$country, ": ",
-                                     yll_bycondition$value, "%")
-
-leaflet(yll_bycondition) %>%
-    addProviderTiles(providers$CartoDB.DarkMatter) %>%
-    addCircleMarkers(lng = ~longitude, lat = ~latitude,
-                     popup = ~popup_label,
-                     color = ~pal(value), fillColor = ~pal(value)) %>%
-    addLegend("bottomright", pal = pal, values = ~value,
-              title = "Population's<br/>years of life lost<br/>to communicable<br/>& other group I<br/>conditions",
-              labFormat = labelFormat(suffix = "%"), opacity = 0.8)
-```
-
-* Even better: use polygons to outline the countries instead of circle markers at their centers. See `addPolygons()`, `addGeoJSON()`, etc.
 
 ---
 
@@ -1293,24 +703,6 @@ class: fullscreen, middle, center
 ```{r fancy_leaflet1, ref.label="fancy_leaflet0", out.width='100%', out.height='100%', message=FALSE, echo=FALSE, cache=FALSE, warning=FALSE}
 ```
 
----
-
-# `rbokeh`
-
-```{r rbokeh0, eval=FALSE}
-library(rbokeh)
-p <- figure(data = subset(who_cbdr, !is.na(country)),
-            width = 800, height = 600,
-            title = "Global population rates in 2013 per 1,000 population") %>%
-    ly_points(value.birthsper1000, value.deathsper1000,
-              color = worldbankincomegroup,
-              hover = list(country,
-                           value.birthsper1000,
-                           value.deathsper1000)) %>%
-    x_axis(label = "Crude Birth Rate") %>%
-    y_axis(label = "Crude Death Rate")
-p
-```
 
 ---
 
@@ -1379,44 +771,6 @@ class: inverse, middle, center
 * I'm only listing R packages that are currently available to download and use, appear to be actively maintained and haven't been subsumed by other R packages, produce graphics that can viewed in a web browser locally or embedded in an html document like this one that was produced with knitr and rmarkdown. I'm not going to list anything that requires server-side support from interfaces like Shiny or Rook to be interactive, for example.
 * Many of these produce graphics in SVG, or Scalable Vector Graphics, which is, according to wikipedia, an XML-based vector image format for 2D graphics with support for interactivity and animation.  Not all of them do, though -- for example, googleVis produces some output as Flash.
 
----
-
-# MotionChart with `googleVis`
-
-```{r googlevis0a, results='asis', message=FALSE, eval=TRUE}
-library(googleVis)
-# for knitr:
-# data.frame with >=4 cols: x, y, id, time. color and size optional,
-# but if you don't provide them,
-# it will choose them for you (if there are columns left to use).
-# Motion Chart only displayed when hosted on a web server
-# or placed in a directory listed in Flash's local trusted sources.
-mc = gvisMotionChart(as.data.frame(
-		subset(who_mort,
-			   !is.na(country)&!is.na(value.maternal),
-			   select = c(country, year, region, worldbankincomegroup, value.infant, value.maternal))),
-	idvar = "country", timevar = "year",
-	xvar = "value.infant", yvar = "value.maternal",
-	colorvar = "worldbankincomegroup",
-	options = list(width = 750, height = 650))
-```
-
-```{r googlevis1a, message=FALSE, eval=FALSE}
-plot(mc) # in an R session, opens in browser
-```
-
-```{r googlevis1b, message=FALSE, echo=FALSE, cache=TRUE}
-print(mc, file = "gvis_motion_chart.html")
-```
-
-### <a href="gvis_motion_chart.html" target="_blank">View visualization in new tab</a> (Flash-based)
-
-???
-
-* "The googleVis package provides an interface between R and the Google Charts API. Google Charts offer interactive charts which can be embedded into web pages. The best known of these charts is probably the Motion Chart, popularised by Hans Rosling in his TED talks.
-The functions of the googleVis package allow the user to visualise data stored in R data frames with Google Charts without uploading the data to Google. The output of a googleVis function is html code that contains the data and references to JavaScript functions hosted by Google."
-* data.frame with >=4 cols: x, y, id, time. color and size optional, but if you don't provide them, it will choose them for you (if there are columns left to use)
-* by default the html file is saved in a temporary folder. if you have problems with a motion chart not displaying, it may be because of Flash's security settings. You'll need to manually add the directory where the html file is stored to the list of trusted local directories.
 
 ---
 background-image: url('assets/img/dogs.jpg')

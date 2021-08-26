@@ -1,34 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="" xml:lang="">
   <head>
     <title>Advanced Data Visualization in R</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="author" content="Sara E. Moore" />
     <meta name="date" content="2017-03-16" />
-    <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
-    <script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-    <link href="libs/plotlyjs-1.16.3/plotly-htmlwidgets.css" rel="stylesheet" />
-    <script src="libs/plotlyjs-1.16.3/plotly-latest.min.js"></script>
-    <script src="libs/plotly-binding-4.5.6/plotly.js"></script>
+    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
     <script src="libs/jquery-1.12.4/jquery.min.js"></script>
-    <script src="libs/datatables-binding-0.2/datatables.js"></script>
-    <link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-    <script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
-    <link href="libs/leaflet-0.7.7/leaflet.css" rel="stylesheet" />
-    <script src="libs/leaflet-0.7.7/leaflet.js"></script>
+    <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-1.3.1/leaflet.js"></script>
     <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-    <link href="libs/leaflet-label-0.2.2/leaflet.label.css" rel="stylesheet" />
-    <script src="libs/leaflet-label-0.2.2/leaflet.label.js"></script>
-    <script src="libs/Proj4Leaflet-0.7.2/proj4-compressed.js"></script>
-    <script src="libs/Proj4Leaflet-0.7.2/proj4leaflet.js"></script>
-    <script src="libs/leaflet-binding-1.1.0/leaflet.js"></script>
-    <script src="libs/leaflet-providers-1.0.27/leaflet-providers.js"></script>
-    <script src="libs/leaflet-providers-plugin-1.1.0/leaflet-providers-plugin.js"></script>
-    <link href="libs/bokehjs-0.12.2/bokeh.min.css" rel="stylesheet" />
-    <link href="libs/bokehjs-0.12.2/loader.css" rel="stylesheet" />
-    <script src="libs/bokehjs-0.12.2/bokeh.min.js"></script>
-    <script src="libs/rbokeh-binding-0.5.0/rbokeh.js"></script>
+    <script src="libs/proj4-2.6.2/proj4.min.js"></script>
+    <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+    <script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+    <script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
@@ -44,8 +33,63 @@ class: center, middle, inverse, title-slide
 
 
 
+```
+## 'showtext.opts()' is now renamed to 'showtext_opts()'
+## The old version still works, but consider using the new function in future code
+```
 
 
+```
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+```
+
+```
+## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.4     v dplyr   1.0.7
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   2.0.1     v forcats 0.5.1
+```
+
+```
+## Warning: package 'tibble' was built under R version 4.1.1
+```
+
+```
+## Warning: package 'readr' was built under R version 4.1.1
+```
+
+```
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
+```
+## Warning: package 'showtext' was built under R version 4.1.1
+```
+
+```
+## Loading required package: sysfonts
+```
+
+```
+## Warning: package 'sysfonts' was built under R version 4.1.1
+```
+
+```
+## Loading required package: showtextdb
+```
+
+```
+## Loading required namespace: bibtex
+```
+
+```
+## Sorry this feature currently cannot be used without the "bibtex" package installed.
+## Please install from GitHub using the "remotes" (or "devtools") package:
+## 
+## remotes::install_github("ROpenSci/bibtex")
+```
 
 
 # How to access these slides
@@ -141,7 +185,7 @@ class: inverse, middle, center
 ]
 
 
-.footnote[1: &lt;a name=cite-Wickham_2014&gt;&lt;/a&gt;[Wickham (2014)](http://www.jstatsoft.org/v59/i10)]
+.footnote[1: ]
 
 ???
 
@@ -160,7 +204,7 @@ class: inverse, middle, center
 
 &gt; "Good grammar is just the first step in creating a good sentence." &amp;nbsp;&lt;sup&gt;2&lt;/sup&gt;
 
-.footnote[1: &lt;a name=cite-Wilkinson_2005&gt;&lt;/a&gt;&lt;a name=cite-Wickham_2009&gt;&lt;/a&gt;&lt;a name=cite-Wickham_2010&gt;&lt;/a&gt;[Wilkinson (2009)](http://dx.doi.org/10.1007/0-387-28695-0); [Wickham (2010)](http://dx.doi.org/10.1007/978-0-387-98141-3); [Wickham (2009)](http://dx.doi.org/10.1198/jcgs.2009.07098)&lt;br /&gt;2: [Wickham (2010)](http://dx.doi.org/10.1198/jcgs.2009.07098)]
+.footnote[1: &lt;br /&gt;2: ]
 
 ???
 
@@ -313,26 +357,6 @@ OK, enough setup -- let's run through an example of using ggplot.
 
 ---
 
-# The data
-
-* [WHO Global Health Observatory](www.who.int/gho/en/)
-* Example:
-
-
-```r
-library(WHO)
-codes &lt;- get_codes()
-who_data &lt;- get_data("WHS9_CBR")
-```
-
-
-
-
-
-
-
-
-
 * Alternatively, use data that ships with `ggplot2`:
     + [diamonds](http://docs.ggplot2.org/current/diamonds.html),
     + [mpg](http://docs.ggplot2.org/current/mpg.html),
@@ -344,34 +368,12 @@ who_data &lt;- get_data("WHS9_CBR")
 * For the majority of the examples in this presentation, I'm going to use data acquired via the WHO R package. This package just downloads data via the World Health Organization's (WHO) Global Health Observatory (GHO) public API.
 * If you would rather not go to this trouble, ggplot2 ships with several good datasets that you can use instead -- a few of them are listed here. You can try your hand with one of those if you want some practice.
 
----
-
-# A simple scatterplot
-
-
-```r
-library(ggplot2)
-p = ggplot(data = subset(who_cbdr, !is.na(country)),
-		aes(x = value.birthsper1000,
-			y = value.deathsper1000,
-			color = worldbankincomegroup)) +
-	geom_point()
-p
-```
-
-???
-
-* This is a simple example to get us started. If you've used ggplot before, this plot will probably be pretty boring for you, but we'll start here and make things more complicated in a moment.
-* Here we have DATA which is the result of merging two datasets downloaded from the World Health Organization's (WHO) Global Health Observatory (GHO).
-* For 193 countries, we have both crude birth rate per 1,000 people and crude mortality rate per 1,000 people in a single year -- 2013.
-* We also have the World Bank income group and global region for each of these countries.
-* Each row in the data is an observation, as we''ve defined it for this problem -- a single country. Each column is a variable. This data is tidy, at least for how we choose to represent it now -- but there are other ways to structure it.
 
 ---
 
 class: fullscreen, middle, center
 
-&lt;img src="index_files/figure-html/simple_scatterplot1-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ???
 
@@ -381,44 +383,12 @@ class: fullscreen, middle, center
 * All that said, this is not a finished product.  We can tell that there is a pattern in the data, but to me, this plot raises more questions than it answers.
 * I'm not going to dwell too much on what a good versus bad plot is -- that's a whole separate topic that others can cover better than I can -- but I just wanted to point that out here as a segue to the next few graphics.
 
----
-
-# Reorder a group aesthetic
-
-
-```r
-levels(who_cbdr$worldbankincomegroup)
-```
-
-```
-## [1] "Global"              "High-income"         "Low-income"         
-## [4] "Lower-middle-income" "Upper-middle-income"
-```
-
-
-```r
-# reorder factor levels
-who_cbdr$worldbankincomegroup = factor(
-	who_cbdr$worldbankincomegroup,
-	levels = levels(who_cbdr$worldbankincomegroup)[c(2, 5:3, 1)],
-	labels = c("High", "Upper-middle", "Lower-middle", "Low", "Global"))
-
-# recreate plot with modifed data
-p = p %+% subset(who_cbdr, !is.na(country))
-p
-```
-
-???
-
-* One of the first things that sticks out at me in the previous plot is the ordering of the groups in the legend. The groups are in alphabetical order, which is the default for ggplot given no other information.
-* Let's change the ordering to something more sensible: high, upper-middle, lower-middle, and then low.  There's an additional level in the data, Global, which represents summaries and isn't used in this scatterplot. We can put it last.
-* Then we'll use this special addition operator provided by ggplot2 that allows us to switch out the original data for the plot with new data. Plot objects store the data, so even though we've changed the data frame in our R session, ggplot won't know about those changes unless we tell it to use the new data.
 
 ---
 
 class: fullscreen, middle, center
 
-&lt;img src="index_files/figure-html/grouporder_scatterplot1-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ???
 
@@ -426,38 +396,9 @@ class: fullscreen, middle, center
 
 ---
 
-# Add labels
-
-
-```r
-p = p +
-	xlab("Crude birth rate") +
-	ylab("Crude death rate") +
-	labs(title = "Global population rates",
-		 subtitle = "2013; per 1,000 population",
-		 caption = "Source: UN World Population Prospects (https://esa.un.org/unpd/wpp/)") +
-	theme(plot.title = element_text(hjust = 0.5),
-		  plot.subtitle = element_text(hjust = 0.5),
-		  plot.caption = element_text(size = 8))
-p
-```
-
-* `ggtitle()` can instead be used to set the title and subtitle
-* `scale_x_*()` and `scale_y_*()` can instead be used to set the x and y axis labels, respectively.
-* As of ggplot2 v2.2.0, title(s) are left-aligned by default.
-
-???
-
-* Because it''s just good practice and is pretty critical to understanding a data visualization, let's add some labels to each axis and a title, subtitle, and data source caption to the graph.
-* There are multiple ways to specify most labels in ggplot. This is just one option that seemed most efficient for this situation. Since we aren't changing other aspects of the x and y axis, I used `xlab()` and `ylab()` instead of the `scale_x_continuous()` and `scale_y_continuous()` functions. Likewise, because we're setting a caption here as well as a title and subtitle, I used `labs()` instead of `ggtitle()`, since `ggtitle()` can't set captions.
-* Since newer versions of ggplot left-align titles, we're manually centering them via the `theme()` function.
-* Also, subtitles and captions are new as of ggplot2 v2.2.0.
-
----
-
 class: fullscreen, middle, center
 
-&lt;img src="index_files/figure-html/label_scatterplot1-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ???
 
@@ -467,14 +408,6 @@ class: fullscreen, middle, center
 
 # Improve legend and colors
 
-
-```r
-p = p +
-	scale_colour_brewer("World Bank Income Group",
-						palette = "Dark2") +
-	theme(legend.position = "bottom")
-p
-```
 
 * For discrete/qualitative color schemes: `scale_colour_hue()`, `scale_colour_discrete()`, `scale_colour_brewer()`, `scale_colour_grey()`, `scale_colour_manual()`, `scale_colour_identity()`
 * For continuous (sequential or diverging) color schemes: `scale_colour_continuous()`, `scale_colour_distiller()`, `scale_colour_gradient()`, `scale_colour_gradient2()`, `scale_color_gradientn()`, `scale_colour_date()`, `scale_colour_datetime()`
@@ -489,7 +422,7 @@ p
 
 class: fullscreen, middle, center
 
-&lt;img src="index_files/figure-html/legend_scatterplot1-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ???
 
@@ -522,16 +455,6 @@ class: fullscreen, middle, center
 # Add a summary (or two)
 
 
-```r
-p = p +
-	stat_ellipse(type = "t", level = 0.9,
-				 segments = 80, alpha = 0.5) +
-	geom_smooth(aes(color = NULL), method = "loess",
-	 			span = 0.6, se = FALSE,
-	 			color = "grey40", linetype = "longdash")
-p
-```
-
 * An alternative way to map an aesthetic to only some layers: specify the mapping in each layer but not in the call to `ggplot`.
 
 ???
@@ -543,7 +466,7 @@ p
 
 class: fullscreen, middle, center
 
-&lt;img src="index_files/figure-html/summary_scatterplot1-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ???
 
@@ -558,7 +481,6 @@ class: fullscreen, middle, center
 
 ```r
 old_theme = theme_set(theme_minimal(base_size = 14))
-p
 ```
 
 * Theme options: `theme_gray()`, `theme_bw()`, `theme_linedraw()`, `theme_light()`, `theme_dark()`, `theme_minimal()`, `theme_classic()`, `theme_void()`
@@ -574,7 +496,7 @@ p
 
 class: fullscreen, middle, center
 
-&lt;img src="index_files/figure-html/theme_scatterplot1-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ???
 
@@ -600,15 +522,6 @@ class: fullscreen, middle, center
 
 # Tweak the theme and text
 
-
-```r
-library(showtext)
-sysfonts::font.add.google("Open Sans", "open_sans")
-showtext::showtext.auto()
-p = p + theme(text = element_text(family = "open_sans"))
-p
-```
-
 * To use a font installed on the local system, call `font.add()` instead.
 * Can instead set font via `base_family` argument of any `theme_*()` function.
 * Turn off use of `showtext`: `showtext.auto(FALSE)`
@@ -624,7 +537,7 @@ p
 
 class: fullscreen, middle, center
 
-&lt;img src="index_files/figure-html/font_scatterplot1-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ???
 
@@ -664,37 +577,12 @@ class: fullscreen, middle, center
 * The packages listed here on the left are for changing fonts on regular text and/or making sure that text renders the way you want it to in your output file. `extrafont` is kind of the original package in this arena, and it works great, but it requires a little more work to get it going, so I went with the simpler example for this presentation.
 * On the right, you'll see some packages that allow you to use emoji and custom icons or images, mostly as plot markers rather than in place of text. For example, the ggflags package allows you to use country flags as markers in a scatterplot.
 
----
-
-# Label observations of interest
-
-
-```r
-library(dplyr)
-library(ggrepel)
-p = p + geom_label_repel(data = subset(who_cbdr,
-									   !is.na(country)) %&gt;%
-			group_by(worldbankincomegroup) %&gt;%
-			top_n(3, abs(scale(value.birthsper1000)) +
-			  		 abs(scale(value.deathsper1000))),
-		aes(label = country),
-		show.legend = FALSE,
-		size = 3.5,
-		alpha = 0.65,
-		box.padding = unit(0.6, "lines"),
-    	point.padding = unit(0.4, "lines"),
-    	segment.color = "grey50",
-    	segment.alpha = 0.65)
-p
-```
-
-* For a pure `ggplot2` solution, try `geom_label()` or `geom_text()` with `nudge_x` and/or `nudge_y` arguments
 
 ---
 
 class: fullscreen, middle, center
 
-&lt;img src="index_files/figure-html/labelobs_scatterplot1-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ---
 
@@ -706,172 +594,14 @@ class: fullscreen, middle, center
 
 
 
-
-???
-
----
-
-# A heatmap with `ggplot2`
-
-
-```r
-wrap_labels = function(x, width = 15) {
-	wrapped = strwrap(x, width = width, simplify = FALSE)
-	lapply(wrapped, paste, collapse = "\n")
-}
-
-p1 = ggplot(who_yllmajorcause,
-			aes(x = ghecauses, y = region, fill = med.pct)) +
-	geom_tile() +
-	scale_fill_distiller("Percent of total",
-						 palette = "Blues",
-						 direction = 1,
-						 breaks = seq(0, 100, 25),
-						 limits = c(0, 100),
-						 guide = guide_colorbar(barwidth = 15,
-						 						barheight = 1)) +
-	scale_x_discrete("Cause Group", expand = c(0, 0),
-					 labels = wrap_labels) +
-	scale_y_discrete("Region", expand = c(0, 0),
-					 labels = wrap_labels) +
-	ggtitle("Median percent of years of life lost",
-			subtitle = "in 2012 by cause and region") +
-	theme_minimal(base_size = 16) +
-	theme(legend.position = "bottom",
-		  plot.title = element_text(hjust = 0.5),
-		  plot.subtitle = element_text(hjust = 0.5))
-p1
+```
+## 'showtext.auto()' is now renamed to 'showtext_auto()'
+## The old version still works, but consider using the new function in future code
 ```
 
 ???
 
-* Note that there is a package called `gplots` with a function called `heatmap.2`: this is commonly used to make heatmaps with dendrograms but is not the same as `ggplot`.
-* expand argument on scale_x_discrete and scale_y_discrete ensures that there is no margin inside the plot - the tiles run all the way to the edge
-* the labels argument accepts a mapping between new labels and old labels or a function
 
----
-
-class: fullscreen, middle, center
-
-&lt;img src="index_files/figure-html/heatmap1-1.png" style="display: block; margin: auto;" /&gt;
-
-
----
-
-# Creating a dendrogram with `ggdendro`
-
-
-```r
-library(tidyr)
-library(ggdendro)
-
-who_yllmajorcause_mat = who_yllmajorcause %&gt;%
-						spread(region, med.pct) # long --&gt; wide
-
-rownames(who_yllmajorcause_mat) = who_yllmajorcause_mat[,"ghecauses"]
-col_idx = which(colnames(who_yllmajorcause_mat)=="ghecauses")
-who_yllmajorcause_mat = as.matrix(who_yllmajorcause_mat[, -col_idx])
-
-yll_hc = hclust(dist(t(who_yllmajorcause_mat)), "average")
-# plot the raw dendrogram
-ggdendrogram(yll_hc, rotate = TRUE)
-```
-
-???
-
-* transform the data frame from long to wide using tidyr::spread
-* do a little housekeeping to get a matrix that the dist() function will like
-* hierarchical clustering (hclust()) on the distances using average or UPGMA agglomeration method
-* create a dendrogram and rotate it so that the branches are horizontal, not vertical (corresponding with rows of heatmap)
-
----
-
-class: fullscreen, middle, center
-
-&lt;img src="index_files/figure-html/dendro1-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-# Simplifying the dendrogram
-
-
-```r
-library(grid) # unit
-
-yll_dendro = as.dendrogram(yll_hc)
-yll_ddata = dendro_data(yll_dendro)
-
-p2 = ggplot(segment(yll_ddata)) +
-		geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) +
-		coord_flip() +
-		theme_dendro()
-p2
-```
-
----
-
-class: fullscreen, middle, center
-
-&lt;img src="index_files/figure-html/simpledendro1-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-# Heatmap, reordered
-
-
-```r
-# just in case there are extra factor levels, etc., un-factor
-old_levels = levels(who_yllmajorcause$region)
-who_yllmajorcause$region = as.character(who_yllmajorcause$region)
-
-# re-factor with clustering/dendrogram ordering
-new_order = order.dendrogram(yll_dendro)
-who_yllmajorcause$region = factor(who_yllmajorcause$region,
-								  old_levels[new_order])
-
-# recreate heatmap with modifed data
-p1 = p1 %+% who_yllmajorcause
-p1
-```
-
----
-
-class: fullscreen, middle, center
-
-&lt;img src="index_files/figure-html/heatmap1ro-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-# Putting it all together
-
-
-```r
-library(gtable)
-
-### dendrogram grob
-# tweak these if the dendrogram doesn't line up:
-dendro_margin = grid::unit(c(15, 0, -5, -10), "points")
-p2_grob = ggplotGrob(p2 + theme(plot.margin = dendro_margin))
-
-### heatmap grob
-p1_grob = ggplotGrob(p1)
-
-# add some space for the dendrogram
-g1 = gtable_add_cols(p1_grob, grid::unit(4, "cm"))
-# adjust top ("t") and bottom ("b") if no title/subtitle:
-g = gtable_add_grob(g1,
-					p2_grob,
-	t = 5, b = 6,
-	l = ncol(g1), r = ncol(g1))
-grid.newpage()
-grid.draw(g)
-```
-
----
-
-class: fullscreen, middle, center
-
-&lt;img src="index_files/figure-html/heatmapdendro1-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -990,151 +720,12 @@ class: inverse, middle, center
 - [gganimate](https://github.com/dgrtwo/gganimate): create animated ggplot2 plots
 - [plotly](https://github.com/ropensci/plotly) ([docs](https://plot.ly/r/): Convert `ggplot2` graphics `\(\rightarrow\)` interactive graphics via `ggplotly()` OR create interactive graphics directly with `plot_ly()`, which function via the plot.ly [ggplot2 library](https://plot.ly/ggplot2/) and [R library](https://plot.ly/r/), respectively. Can operate entirely locally (meaning your plot doesn't have to be uploaded to plot.ly's servers and shared with the world).
 
----
-
-# `ggplot2` + `ggiraph`
-
-
-```r
-p_basic = ggplot(data = subset(who_cbdr, !is.na(country)),
-			 aes(x = value.birthsper1000,
-				 y = value.deathsper1000,
-				 color = worldbankincomegroup)) +
-	scale_colour_brewer("World Bank Income Group",
-				palette = "Dark2") +
-	xlab("Crude birth rate") +
-	ylab("Crude death rate") +
-	labs(title = "Global population rates",
-		 subtitle = "2013; per 1,000 population",
-		 caption = "Source: UN World Population Prospects (https://esa.un.org/unpd/wpp/)") +
-	theme_minimal(base_size = 14) +
-	theme(plot.title = element_text(hjust = 0.5),
-		  plot.subtitle = element_text(hjust = 0.5),
-		  plot.caption = element_text(size = 8),
-		  legend.position = "bottom")
-
-p_basic +
-	geom_point()
-```
 
 ---
 
 class: fullscreen, middle, center
 
-&lt;img src="index_files/figure-html/scatter_revisited1-1.png" style="display: block; margin: auto;" /&gt;
 
----
-
-# `ggplot2` + `ggiraph`
-
-
-```r
-# devtools::install_github("davidgohel/ggiraph")
-library(ggiraph)
-
-p_ggiraph = p_basic +
-	geom_point_interactive(
-		aes(tooltip = paste(gsub("'", "&amp;#39;", country),
-							paste(value.birthsper1000,
-								  value.deathsper1000,
-						  		  sep = ", "),
-							sep = ": ")))
-```
-
-* Use `geom_*_interactive()` in place of `geom_*()`
-* Use `tooltip`, `onclick` and `data_id` aesthetics to specify interactivity
-    * `tooltip`: displayed when mouse is over an element.
-	* `onclick`: javascript function to be executed when an element is clicked, such as `paste0("alert(\"", data$x, "\")" )`
-    * `data_id`: id to be associated with elements.
-* `gsub()` is used to substitute the ASCII equivalent for any apostrophes
-
----
-
-# `ggplot2` + `ggiraph`
-
-
-```r
-# in an R session, opens in browser
-ggiraph(ggobj = p_ggiraph,
-		width_svg = 8,
-		height_svg = 6,
-		tooltip_opacity = 0.7)
-```
-
-
-
-### &lt;a href="ggiraph_scatter_plot.html" target="_blank"&gt;View visualization in new tab&lt;/a&gt;
-
----
-
-# `ggplot` + `plotly`
-
-
-```r
-library(plotly)
-
-p_plotly = p_basic +
-	geom_point(aes(text = country))
-
-ggplotly(p_plotly)
-```
-
-* Use the `text` aesthetic to add additional information to the tooltips. `ggplot()` may complain about this but `ggplotly()` understands it.
-
-???
-
-* Start with the static ggplot
-* Note that graphics are NO LONGER uploaded to plot.ly and are **public** by default.
-* Also, the conversion does not always go as planned.  Sometimes the ggplotly function will reject the ggplot object with a cryptic error message. Sometimes it will convert it, but it will not look sensible. The tooltips are also not as helpful as they could be -- but there are apparently cumbersome ways to hack them. Your mileage may vary.
-
-
----
-
-class: fullscreen, middle, center
-
-<div id="htmlwidget-2fd3abcb1bb969d2a5c8" style="width:100%;height:100%;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2fd3abcb1bb969d2a5c8">{"x":{"data":[{"x":[8.9,16.5,13.2,9.5,15.3,15.2,12.7,11.7,15.5,11.3,13.9,9.5,11.5,11.1,11.3,35.4,10.9,11.2,12.3,8.5,9.7,14.5,15.4,20.3,9.2,8.4,20.6,11,11.3,11.6,9.2,6.8,10.7,13.8,12.4,20.9,10.8,8.7,11,9.6,11.8,13.8,8.8,19.4,9.9,10.7,10,10.4,12,10.4,14.5,14.5,12.2,13.2,14.5],"y":[8.4,6.8,6.4,9,6.1,2.2,6.4,9.9,3.6,7.2,5.4,11.1,5.5,10,9.6,11.5,11.3,9.4,8.7,10.6,9.7,6.2,5.9,5.1,9.5,9.5,1.9,14.2,12,6.8,7.5,8.7,8.3,6.3,8.1,2.8,10,9.1,1.3,5.5,14.8,8.5,10.2,3.2,4.5,9.4,9.1,8.2,9.6,7.7,9.6,1.1,8.9,8.4,9.1],"text":["Andorra<br>value.birthsper1000: 8.9<br>value.deathsper1000: 8.4<br>worldbankincomegroup: High","Antigua and Barbuda<br>value.birthsper1000: 16.5<br>value.deathsper1000: 6.8<br>worldbankincomegroup: High","Australia<br>value.birthsper1000: 13.2<br>value.deathsper1000: 6.4<br>worldbankincomegroup: High","Austria<br>value.birthsper1000: 9.5<br>value.deathsper1000: 9<br>worldbankincomegroup: High","Bahamas<br>value.birthsper1000: 15.3<br>value.deathsper1000: 6.1<br>worldbankincomegroup: High","Bahrain<br>value.birthsper1000: 15.2<br>value.deathsper1000: 2.2<br>worldbankincomegroup: High","Barbados<br>value.birthsper1000: 12.7<br>value.deathsper1000: 6.4<br>worldbankincomegroup: High","Belgium<br>value.birthsper1000: 11.7<br>value.deathsper1000: 9.9<br>worldbankincomegroup: High","Brunei Darussalam<br>value.birthsper1000: 15.5<br>value.deathsper1000: 3.6<br>worldbankincomegroup: High","Canada<br>value.birthsper1000: 11.3<br>value.deathsper1000: 7.2<br>worldbankincomegroup: High","Chile<br>value.birthsper1000: 13.9<br>value.deathsper1000: 5.4<br>worldbankincomegroup: High","Croatia<br>value.birthsper1000: 9.5<br>value.deathsper1000: 11.1<br>worldbankincomegroup: High","Cyprus<br>value.birthsper1000: 11.5<br>value.deathsper1000: 5.5<br>worldbankincomegroup: High","Czechia<br>value.birthsper1000: 11.1<br>value.deathsper1000: 10<br>worldbankincomegroup: High","Denmark<br>value.birthsper1000: 11.3<br>value.deathsper1000: 9.6<br>worldbankincomegroup: High","Equatorial Guinea<br>value.birthsper1000: 35.4<br>value.deathsper1000: 11.5<br>worldbankincomegroup: High","Estonia<br>value.birthsper1000: 10.9<br>value.deathsper1000: 11.3<br>worldbankincomegroup: High","Finland<br>value.birthsper1000: 11.2<br>value.deathsper1000: 9.4<br>worldbankincomegroup: High","France<br>value.birthsper1000: 12.3<br>value.deathsper1000: 8.7<br>worldbankincomegroup: High","Germany<br>value.birthsper1000: 8.5<br>value.deathsper1000: 10.6<br>worldbankincomegroup: High","Greece<br>value.birthsper1000: 9.7<br>value.deathsper1000: 9.7<br>worldbankincomegroup: High","Iceland<br>value.birthsper1000: 14.5<br>value.deathsper1000: 6.2<br>worldbankincomegroup: High","Ireland<br>value.birthsper1000: 15.4<br>value.deathsper1000: 5.9<br>worldbankincomegroup: High","Israel<br>value.birthsper1000: 20.3<br>value.deathsper1000: 5.1<br>worldbankincomegroup: High","Italy<br>value.birthsper1000: 9.2<br>value.deathsper1000: 9.5<br>worldbankincomegroup: High","Japan<br>value.birthsper1000: 8.4<br>value.deathsper1000: 9.5<br>worldbankincomegroup: High","Kuwait<br>value.birthsper1000: 20.6<br>value.deathsper1000: 1.9<br>worldbankincomegroup: High","Latvia<br>value.birthsper1000: 11<br>value.deathsper1000: 14.2<br>worldbankincomegroup: High","Lithuania<br>value.birthsper1000: 11.3<br>value.deathsper1000: 12<br>worldbankincomegroup: High","Luxembourg<br>value.birthsper1000: 11.6<br>value.deathsper1000: 6.8<br>worldbankincomegroup: High","Malta<br>value.birthsper1000: 9.2<br>value.deathsper1000: 7.5<br>worldbankincomegroup: High","Monaco<br>value.birthsper1000: 6.8<br>value.deathsper1000: 8.7<br>worldbankincomegroup: High","Netherlands<br>value.birthsper1000: 10.7<br>value.deathsper1000: 8.3<br>worldbankincomegroup: High","New Zealand<br>value.birthsper1000: 13.8<br>value.deathsper1000: 6.3<br>worldbankincomegroup: High","Norway<br>value.birthsper1000: 12.4<br>value.deathsper1000: 8.1<br>worldbankincomegroup: High","Oman<br>value.birthsper1000: 20.9<br>value.deathsper1000: 2.8<br>worldbankincomegroup: High","Poland<br>value.birthsper1000: 10.8<br>value.deathsper1000: 10<br>worldbankincomegroup: High","Portugal<br>value.birthsper1000: 8.7<br>value.deathsper1000: 9.1<br>worldbankincomegroup: High","Qatar<br>value.birthsper1000: 11<br>value.deathsper1000: 1.3<br>worldbankincomegroup: High","Republic of Korea<br>value.birthsper1000: 9.6<br>value.deathsper1000: 5.5<br>worldbankincomegroup: High","Russian Federation<br>value.birthsper1000: 11.8<br>value.deathsper1000: 14.8<br>worldbankincomegroup: High","Saint Kitts and Nevis<br>value.birthsper1000: 13.8<br>value.deathsper1000: 8.5<br>worldbankincomegroup: High","San Marino<br>value.birthsper1000: 8.8<br>value.deathsper1000: 10.2<br>worldbankincomegroup: High","Saudi Arabia<br>value.birthsper1000: 19.4<br>value.deathsper1000: 3.2<br>worldbankincomegroup: High","Singapore<br>value.birthsper1000: 9.9<br>value.deathsper1000: 4.5<br>worldbankincomegroup: High","Slovakia<br>value.birthsper1000: 10.7<br>value.deathsper1000: 9.4<br>worldbankincomegroup: High","Slovenia<br>value.birthsper1000: 10<br>value.deathsper1000: 9.1<br>worldbankincomegroup: High","Spain<br>value.birthsper1000: 10.4<br>value.deathsper1000: 8.2<br>worldbankincomegroup: High","Sweden<br>value.birthsper1000: 12<br>value.deathsper1000: 9.6<br>worldbankincomegroup: High","Switzerland<br>value.birthsper1000: 10.4<br>value.deathsper1000: 7.7<br>worldbankincomegroup: High","Trinidad and Tobago<br>value.birthsper1000: 14.5<br>value.deathsper1000: 9.6<br>worldbankincomegroup: High","United Arab Emirates<br>value.birthsper1000: 14.5<br>value.deathsper1000: 1.1<br>worldbankincomegroup: High","United Kingdom of Great Britain and Northern Ireland<br>value.birthsper1000: 12.2<br>value.deathsper1000: 8.9<br>worldbankincomegroup: High","United States of America<br>value.birthsper1000: 13.2<br>value.deathsper1000: 8.4<br>worldbankincomegroup: High","Uruguay<br>value.birthsper1000: 14.5<br>value.deathsper1000: 9.1<br>worldbankincomegroup: High"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(27,158,119,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(27,158,119,1)"}},"hoveron":"points","name":"High","legendgroup":"High","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"},{"x":[12.9,24.3,44.1,16.8,17.8,11,23.4,9,23.6,14.9,9.6,13.3,18.8,14.9,15.1,9.5,15.6,20.8,20.8,20.4,31.9,19.3,9.9,18.8,31.1,18,27,20.5,13.4,20.7,17.7,22,27.2,11.5,18.4,11.6,26,26.4,10.9,19.4,19.7,10.3,15.4,16.3,9.7,16.6,20.9,17.7,10.2,10.7,25.5,17.2,16.8,21.3,23.6,19.8,null],"y":[9.4,5.7,13.9,7.6,6.3,13.5,4,9.4,7.2,6.1,14.2,7.2,4.2,5,4.4,8.5,7.2,5.9,5.3,6.9,9,6.9,13,5.1,4.8,7.1,3.7,9.7,4.4,4.2,5,3.5,6.6,7.4,5.3,9.5,5.7,3.5,5.9,5,4.4,11.8,7,6.5,11.9,6.7,11.1,4.6,7.6,9.4,6.7,5.5,5.7,8.8,8.7,4.8,5.9],"text":["Albania<br>value.birthsper1000: 12.9<br>value.deathsper1000: 9.4<br>worldbankincomegroup: Upper-middle","Algeria<br>value.birthsper1000: 24.3<br>value.deathsper1000: 5.7<br>worldbankincomegroup: Upper-middle","Angola<br>value.birthsper1000: 44.1<br>value.deathsper1000: 13.9<br>worldbankincomegroup: Upper-middle","Argentina<br>value.birthsper1000: 16.8<br>value.deathsper1000: 7.6<br>worldbankincomegroup: Upper-middle","Azerbaijan<br>value.birthsper1000: 17.8<br>value.deathsper1000: 6.3<br>worldbankincomegroup: Upper-middle","Belarus<br>value.birthsper1000: 11<br>value.deathsper1000: 13.5<br>worldbankincomegroup: Upper-middle","Belize<br>value.birthsper1000: 23.4<br>value.deathsper1000: 4<br>worldbankincomegroup: Upper-middle","Bosnia and Herzegovina<br>value.birthsper1000: 9<br>value.deathsper1000: 9.4<br>worldbankincomegroup: Upper-middle","Botswana<br>value.birthsper1000: 23.6<br>value.deathsper1000: 7.2<br>worldbankincomegroup: Upper-middle","Brazil<br>value.birthsper1000: 14.9<br>value.deathsper1000: 6.1<br>worldbankincomegroup: Upper-middle","Bulgaria<br>value.birthsper1000: 9.6<br>value.deathsper1000: 14.2<br>worldbankincomegroup: Upper-middle","China<br>value.birthsper1000: 13.3<br>value.deathsper1000: 7.2<br>worldbankincomegroup: Upper-middle","Colombia<br>value.birthsper1000: 18.8<br>value.deathsper1000: 4.2<br>worldbankincomegroup: Upper-middle","Cook Islands<br>value.birthsper1000: 14.9<br>value.deathsper1000: 5<br>worldbankincomegroup: Upper-middle","Costa Rica<br>value.birthsper1000: 15.1<br>value.deathsper1000: 4.4<br>worldbankincomegroup: Upper-middle","Cuba<br>value.birthsper1000: 9.5<br>value.deathsper1000: 8.5<br>worldbankincomegroup: Upper-middle","Dominica<br>value.birthsper1000: 15.6<br>value.deathsper1000: 7.2<br>worldbankincomegroup: Upper-middle","Dominican Republic<br>value.birthsper1000: 20.8<br>value.deathsper1000: 5.9<br>worldbankincomegroup: Upper-middle","Ecuador<br>value.birthsper1000: 20.8<br>value.deathsper1000: 5.3<br>worldbankincomegroup: Upper-middle","Fiji<br>value.birthsper1000: 20.4<br>value.deathsper1000: 6.9<br>worldbankincomegroup: Upper-middle","Gabon<br>value.birthsper1000: 31.9<br>value.deathsper1000: 9<br>worldbankincomegroup: Upper-middle","Grenada<br>value.birthsper1000: 19.3<br>value.deathsper1000: 6.9<br>worldbankincomegroup: Upper-middle","Hungary<br>value.birthsper1000: 9.9<br>value.deathsper1000: 13<br>worldbankincomegroup: Upper-middle","Iran (Islamic Republic of)<br>value.birthsper1000: 18.8<br>value.deathsper1000: 5.1<br>worldbankincomegroup: Upper-middle","Iraq<br>value.birthsper1000: 31.1<br>value.deathsper1000: 4.8<br>worldbankincomegroup: Upper-middle","Jamaica<br>value.birthsper1000: 18<br>value.deathsper1000: 7.1<br>worldbankincomegroup: Upper-middle","Jordan<br>value.birthsper1000: 27<br>value.deathsper1000: 3.7<br>worldbankincomegroup: Upper-middle","Kazakhstan<br>value.birthsper1000: 20.5<br>value.deathsper1000: 9.7<br>worldbankincomegroup: Upper-middle","Lebanon<br>value.birthsper1000: 13.4<br>value.deathsper1000: 4.4<br>worldbankincomegroup: Upper-middle","Libya<br>value.birthsper1000: 20.7<br>value.deathsper1000: 4.2<br>worldbankincomegroup: Upper-middle","Malaysia<br>value.birthsper1000: 17.7<br>value.deathsper1000: 5<br>worldbankincomegroup: Upper-middle","Maldives<br>value.birthsper1000: 22<br>value.deathsper1000: 3.5<br>worldbankincomegroup: Upper-middle","Marshall Islands<br>value.birthsper1000: 27.2<br>value.deathsper1000: 6.6<br>worldbankincomegroup: Upper-middle","Mauritius<br>value.birthsper1000: 11.5<br>value.deathsper1000: 7.4<br>worldbankincomegroup: Upper-middle","Mexico<br>value.birthsper1000: 18.4<br>value.deathsper1000: 5.3<br>worldbankincomegroup: Upper-middle","Montenegro<br>value.birthsper1000: 11.6<br>value.deathsper1000: 9.5<br>worldbankincomegroup: Upper-middle","Namibia<br>value.birthsper1000: 26<br>value.deathsper1000: 5.7<br>worldbankincomegroup: Upper-middle","Nauru<br>value.birthsper1000: 26.4<br>value.deathsper1000: 3.5<br>worldbankincomegroup: Upper-middle","Palau<br>value.birthsper1000: 10.9<br>value.deathsper1000: 5.9<br>worldbankincomegroup: Upper-middle","Panama<br>value.birthsper1000: 19.4<br>value.deathsper1000: 5<br>worldbankincomegroup: Upper-middle","Peru<br>value.birthsper1000: 19.7<br>value.deathsper1000: 4.4<br>worldbankincomegroup: Upper-middle","Romania<br>value.birthsper1000: 10.3<br>value.deathsper1000: 11.8<br>worldbankincomegroup: Upper-middle","Saint Lucia<br>value.birthsper1000: 15.4<br>value.deathsper1000: 7<br>worldbankincomegroup: Upper-middle","Saint Vincent and the Grenadines<br>value.birthsper1000: 16.3<br>value.deathsper1000: 6.5<br>worldbankincomegroup: Upper-middle","Serbia<br>value.birthsper1000: 9.7<br>value.deathsper1000: 11.9<br>worldbankincomegroup: Upper-middle","Seychelles<br>value.birthsper1000: 16.6<br>value.deathsper1000: 6.7<br>worldbankincomegroup: Upper-middle","South Africa<br>value.birthsper1000: 20.9<br>value.deathsper1000: 11.1<br>worldbankincomegroup: Upper-middle","Suriname<br>value.birthsper1000: 17.7<br>value.deathsper1000: 4.6<br>worldbankincomegroup: Upper-middle","Thailand<br>value.birthsper1000: 10.2<br>value.deathsper1000: 7.6<br>worldbankincomegroup: Upper-middle","The former Yugoslav republic of Macedonia<br>value.birthsper1000: 10.7<br>value.deathsper1000: 9.4<br>worldbankincomegroup: Upper-middle","Tonga<br>value.birthsper1000: 25.5<br>value.deathsper1000: 6.7<br>worldbankincomegroup: Upper-middle","Tunisia<br>value.birthsper1000: 17.2<br>value.deathsper1000: 5.5<br>worldbankincomegroup: Upper-middle","Turkey<br>value.birthsper1000: 16.8<br>value.deathsper1000: 5.7<br>worldbankincomegroup: Upper-middle","Turkmenistan<br>value.birthsper1000: 21.3<br>value.deathsper1000: 8.8<br>worldbankincomegroup: Upper-middle","Tuvalu<br>value.birthsper1000: 23.6<br>value.deathsper1000: 8.7<br>worldbankincomegroup: Upper-middle","Venezuela (Bolivarian Republic of)<br>value.birthsper1000: 19.8<br>value.deathsper1000: 4.8<br>worldbankincomegroup: Upper-middle","Niue<br>value.birthsper1000: NA<br>value.deathsper1000: 5.9<br>worldbankincomegroup: Upper-middle"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(217,95,2,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(217,95,2,1)"}},"hoveron":"points","name":"Upper-middle","legendgroup":"Upper-middle","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"},{"x":[13.7,19.6,25.7,20.1,37.3,37.6,36.6,27.5,23.2,20.1,13.3,30.9,31,20.3,25.8,20.4,18.8,23.3,27.1,26.8,27.5,34.1,23.5,22.7,22.7,22.7,41.2,25.2,28.9,23.7,24.4,12.1,26.2,33.9,37.7,30.8,36.1,17.9,33.5,29.9,24,35.8,10.8,21.5,26.6,15.5,31.1,42.8],"y":[12.6,6.5,7,5.2,10.8,10.1,12.6,8.8,6.4,6.6,11.5,8.1,5.2,7.9,4.5,7.9,6.2,8.2,6.6,6.7,14.1,7.8,6.1,6.7,6.4,4.8,11.9,7.3,7.7,4.8,5.9,12.4,5.2,6.5,7,5.4,11.1,6.6,7.8,11.8,3.5,6,15.1,6.4,4.5,5.8,6.7,9.7],"text":["Armenia<br>value.birthsper1000: 13.7<br>value.deathsper1000: 12.6<br>worldbankincomegroup: Lower-middle","Bhutan<br>value.birthsper1000: 19.6<br>value.deathsper1000: 6.5<br>worldbankincomegroup: Lower-middle","Bolivia (Plurinational State of)<br>value.birthsper1000: 25.7<br>value.deathsper1000: 7<br>worldbankincomegroup: Lower-middle","Cabo Verde<br>value.birthsper1000: 20.1<br>value.deathsper1000: 5.2<br>worldbankincomegroup: Lower-middle","Cameroon<br>value.birthsper1000: 37.3<br>value.deathsper1000: 10.8<br>worldbankincomegroup: Lower-middle","Congo<br>value.birthsper1000: 37.6<br>value.deathsper1000: 10.1<br>worldbankincomegroup: Lower-middle","Côte d'Ivoire<br>value.birthsper1000: 36.6<br>value.deathsper1000: 12.6<br>worldbankincomegroup: Lower-middle","Djibouti<br>value.birthsper1000: 27.5<br>value.deathsper1000: 8.8<br>worldbankincomegroup: Lower-middle","Egypt<br>value.birthsper1000: 23.2<br>value.deathsper1000: 6.4<br>worldbankincomegroup: Lower-middle","El Salvador<br>value.birthsper1000: 20.1<br>value.deathsper1000: 6.6<br>worldbankincomegroup: Lower-middle","Georgia<br>value.birthsper1000: 13.3<br>value.deathsper1000: 11.5<br>worldbankincomegroup: Lower-middle","Ghana<br>value.birthsper1000: 30.9<br>value.deathsper1000: 8.1<br>worldbankincomegroup: Lower-middle","Guatemala<br>value.birthsper1000: 31<br>value.deathsper1000: 5.2<br>worldbankincomegroup: Lower-middle","Guyana<br>value.birthsper1000: 20.3<br>value.deathsper1000: 7.9<br>worldbankincomegroup: Lower-middle","Honduras<br>value.birthsper1000: 25.8<br>value.deathsper1000: 4.5<br>worldbankincomegroup: Lower-middle","India<br>value.birthsper1000: 20.4<br>value.deathsper1000: 7.9<br>worldbankincomegroup: Lower-middle","Indonesia<br>value.birthsper1000: 18.8<br>value.deathsper1000: 6.2<br>worldbankincomegroup: Lower-middle","Kiribati<br>value.birthsper1000: 23.3<br>value.deathsper1000: 8.2<br>worldbankincomegroup: Lower-middle","Kyrgyzstan<br>value.birthsper1000: 27.1<br>value.deathsper1000: 6.6<br>worldbankincomegroup: Lower-middle","Lao People's Democratic Republic<br>value.birthsper1000: 26.8<br>value.deathsper1000: 6.7<br>worldbankincomegroup: Lower-middle","Lesotho<br>value.birthsper1000: 27.5<br>value.deathsper1000: 14.1<br>worldbankincomegroup: Lower-middle","Mauritania<br>value.birthsper1000: 34.1<br>value.deathsper1000: 7.8<br>worldbankincomegroup: Lower-middle","Micronesia (Federated States of)<br>value.birthsper1000: 23.5<br>value.deathsper1000: 6.1<br>worldbankincomegroup: Lower-middle","Mongolia<br>value.birthsper1000: 22.7<br>value.deathsper1000: 6.7<br>worldbankincomegroup: Lower-middle","Morocco<br>value.birthsper1000: 22.7<br>value.deathsper1000: 6.4<br>worldbankincomegroup: Lower-middle","Nicaragua<br>value.birthsper1000: 22.7<br>value.deathsper1000: 4.8<br>worldbankincomegroup: Lower-middle","Nigeria<br>value.birthsper1000: 41.2<br>value.deathsper1000: 11.9<br>worldbankincomegroup: Lower-middle","Pakistan<br>value.birthsper1000: 25.2<br>value.deathsper1000: 7.3<br>worldbankincomegroup: Lower-middle","Papua New Guinea<br>value.birthsper1000: 28.9<br>value.deathsper1000: 7.7<br>worldbankincomegroup: Lower-middle","Paraguay<br>value.birthsper1000: 23.7<br>value.deathsper1000: 4.8<br>worldbankincomegroup: Lower-middle","Philippines<br>value.birthsper1000: 24.4<br>value.deathsper1000: 5.9<br>worldbankincomegroup: Lower-middle","Republic of Moldova<br>value.birthsper1000: 12.1<br>value.deathsper1000: 12.4<br>worldbankincomegroup: Lower-middle","Samoa<br>value.birthsper1000: 26.2<br>value.deathsper1000: 5.2<br>worldbankincomegroup: Lower-middle","Sao Tome and Principe<br>value.birthsper1000: 33.9<br>value.deathsper1000: 6.5<br>worldbankincomegroup: Lower-middle","Senegal<br>value.birthsper1000: 37.7<br>value.deathsper1000: 7<br>worldbankincomegroup: Lower-middle","Solomon Islands<br>value.birthsper1000: 30.8<br>value.deathsper1000: 5.4<br>worldbankincomegroup: Lower-middle","South Sudan<br>value.birthsper1000: 36.1<br>value.deathsper1000: 11.1<br>worldbankincomegroup: Lower-middle","Sri Lanka<br>value.birthsper1000: 17.9<br>value.deathsper1000: 6.6<br>worldbankincomegroup: Lower-middle","Sudan<br>value.birthsper1000: 33.5<br>value.deathsper1000: 7.8<br>worldbankincomegroup: Lower-middle","Swaziland<br>value.birthsper1000: 29.9<br>value.deathsper1000: 11.8<br>worldbankincomegroup: Lower-middle","Syrian Arab Republic<br>value.birthsper1000: 24<br>value.deathsper1000: 3.5<br>worldbankincomegroup: Lower-middle","Timor-Leste<br>value.birthsper1000: 35.8<br>value.deathsper1000: 6<br>worldbankincomegroup: Lower-middle","Ukraine<br>value.birthsper1000: 10.8<br>value.deathsper1000: 15.1<br>worldbankincomegroup: Lower-middle","Uzbekistan<br>value.birthsper1000: 21.5<br>value.deathsper1000: 6.4<br>worldbankincomegroup: Lower-middle","Vanuatu<br>value.birthsper1000: 26.6<br>value.deathsper1000: 4.5<br>worldbankincomegroup: Lower-middle","Viet Nam<br>value.birthsper1000: 15.5<br>value.deathsper1000: 5.8<br>worldbankincomegroup: Lower-middle","Yemen<br>value.birthsper1000: 31.1<br>value.deathsper1000: 6.7<br>worldbankincomegroup: Lower-middle","Zambia<br>value.birthsper1000: 42.8<br>value.deathsper1000: 9.7<br>worldbankincomegroup: Lower-middle"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(117,112,179,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(117,112,179,1)"}},"hoveron":"points","name":"Lower-middle","legendgroup":"Lower-middle","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"},{"x":[34.1,20,36.4,40.9,44.7,25.7,34.2,45.9,35.2,14.4,42.7,36.7,33,42.7,36.9,37.5,25.6,34.9,35.5,34.7,39.8,47.1,38.9,17.2,21,49.7,35.2,36.6,43.8,33,36.4,43.2,39.2,31.3],"y":[7.7,5.7,9.6,9.5,11.1,5.7,14,13.6,8.2,9.2,13.7,6.3,7.2,8.2,10.1,12.3,8.6,8.3,8,7,9,11.2,11.8,8.4,6.6,10.2,6.4,16.8,12.7,6,9.6,9.2,7.8,9.8],"text":["Afghanistan<br>value.birthsper1000: 34.1<br>value.deathsper1000: 7.7<br>worldbankincomegroup: Low","Bangladesh<br>value.birthsper1000: 20<br>value.deathsper1000: 5.7<br>worldbankincomegroup: Low","Benin<br>value.birthsper1000: 36.4<br>value.deathsper1000: 9.6<br>worldbankincomegroup: Low","Burkina Faso<br>value.birthsper1000: 40.9<br>value.deathsper1000: 9.5<br>worldbankincomegroup: Low","Burundi<br>value.birthsper1000: 44.7<br>value.deathsper1000: 11.1<br>worldbankincomegroup: Low","Cambodia<br>value.birthsper1000: 25.7<br>value.deathsper1000: 5.7<br>worldbankincomegroup: Low","Central African Republic<br>value.birthsper1000: 34.2<br>value.deathsper1000: 14<br>worldbankincomegroup: Low","Chad<br>value.birthsper1000: 45.9<br>value.deathsper1000: 13.6<br>worldbankincomegroup: Low","Comoros<br>value.birthsper1000: 35.2<br>value.deathsper1000: 8.2<br>worldbankincomegroup: Low","Democratic People's Republic of Korea<br>value.birthsper1000: 14.4<br>value.deathsper1000: 9.2<br>worldbankincomegroup: Low","Democratic Republic of the Congo<br>value.birthsper1000: 42.7<br>value.deathsper1000: 13.7<br>worldbankincomegroup: Low","Eritrea<br>value.birthsper1000: 36.7<br>value.deathsper1000: 6.3<br>worldbankincomegroup: Low","Ethiopia<br>value.birthsper1000: 33<br>value.deathsper1000: 7.2<br>worldbankincomegroup: Low","Gambia<br>value.birthsper1000: 42.7<br>value.deathsper1000: 8.2<br>worldbankincomegroup: Low","Guinea<br>value.birthsper1000: 36.9<br>value.deathsper1000: 10.1<br>worldbankincomegroup: Low","Guinea-Bissau<br>value.birthsper1000: 37.5<br>value.deathsper1000: 12.3<br>worldbankincomegroup: Low","Haiti<br>value.birthsper1000: 25.6<br>value.deathsper1000: 8.6<br>worldbankincomegroup: Low","Kenya<br>value.birthsper1000: 34.9<br>value.deathsper1000: 8.3<br>worldbankincomegroup: Low","Liberia<br>value.birthsper1000: 35.5<br>value.deathsper1000: 8<br>worldbankincomegroup: Low","Madagascar<br>value.birthsper1000: 34.7<br>value.deathsper1000: 7<br>worldbankincomegroup: Low","Malawi<br>value.birthsper1000: 39.8<br>value.deathsper1000: 9<br>worldbankincomegroup: Low","Mali<br>value.birthsper1000: 47.1<br>value.deathsper1000: 11.2<br>worldbankincomegroup: Low","Mozambique<br>value.birthsper1000: 38.9<br>value.deathsper1000: 11.8<br>worldbankincomegroup: Low","Myanmar<br>value.birthsper1000: 17.2<br>value.deathsper1000: 8.4<br>worldbankincomegroup: Low","Nepal<br>value.birthsper1000: 21<br>value.deathsper1000: 6.6<br>worldbankincomegroup: Low","Niger<br>value.birthsper1000: 49.7<br>value.deathsper1000: 10.2<br>worldbankincomegroup: Low","Rwanda<br>value.birthsper1000: 35.2<br>value.deathsper1000: 6.4<br>worldbankincomegroup: Low","Sierra Leone<br>value.birthsper1000: 36.6<br>value.deathsper1000: 16.8<br>worldbankincomegroup: Low","Somalia<br>value.birthsper1000: 43.8<br>value.deathsper1000: 12.7<br>worldbankincomegroup: Low","Tajikistan<br>value.birthsper1000: 33<br>value.deathsper1000: 6<br>worldbankincomegroup: Low","Togo<br>value.birthsper1000: 36.4<br>value.deathsper1000: 9.6<br>worldbankincomegroup: Low","Uganda<br>value.birthsper1000: 43.2<br>value.deathsper1000: 9.2<br>worldbankincomegroup: Low","United Republic of Tanzania<br>value.birthsper1000: 39.2<br>value.deathsper1000: 7.8<br>worldbankincomegroup: Low","Zimbabwe<br>value.birthsper1000: 31.3<br>value.deathsper1000: 9.8<br>worldbankincomegroup: Low"],"key":null,"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,41,138,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,41,138,1)"}},"hoveron":"points","name":"Low","legendgroup":"Low","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"}],"layout":{"margin":{"t":50.7142659471426,"r":9.29846409298464,"b":50.5216549052165,"l":47.4221668742217},"font":{"color":"rgba(0,0,0,1)","family":"","size":18.5969281859693},"title":"Global population rates","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":22.3163138231631},"xaxis":{"domain":[0,1],"type":"linear","autorange":false,"tickmode":"array","range":[4.655,51.845],"ticktext":["10","20","30","40","50"],"tickvals":[10,20,30,40,50],"ticks":"","tickcolor":null,"ticklen":4.64923204649232,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":14.8775425487754},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"Crude birth rate","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":18.5969281859693},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"type":"linear","autorange":false,"tickmode":"array","range":[0.315,17.585],"ticktext":["5","10","15"],"tickvals":[5,10,15],"ticks":"","tickcolor":null,"ticklen":4.64923204649232,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":14.8775425487754},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"Crude death rate","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":18.5969281859693},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.8775425487754},"y":0.931102362204724},"annotations":[{"text":"World Bank Income Group","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":18.5969281859693},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"modeBarButtonsToRemove":["sendDataToCloud"]},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
-
----
-class: inverse, middle, center
-
-# `htmlwidgets`: Interactive data visualization framework in R
-
----
-
-# `htmlwidgets` for interactive graphics in R
-
-- `htmlwidgets` provides the framework on which most of the interactive plotting packages in R rely (if they use JavaScript plotting libraries on the backend).
-- [package source](https://github.com/ramnathv/htmlwidgets), [docs](http://www.htmlwidgets.org/), [gallery](http://gallery.htmlwidgets.org/)
-- Advanced usage may require knowledge/use of JavaScript.
-
----
-
-# `DT`
-
-
-```r
-library(DT)
-dont_show_cols = which(grepl("^gho|^publish",
-							 colnames(who_cbdr)))
-datatable(who_cbdr[,-dont_show_cols],
-		  caption = "Global population rates in 2013 per 1,000 population",
-		  rownames = FALSE,
-		  colnames = c("World Bank Income Group" = 2,
-		  			   "Crude birth rate" = 5,
-		  			   "Crude death rate" = 6),
-		  options = list(pageLength = 5,
-		  				 lengthMenu = c(5, 10, 15)))
-```
-
-* Uses the [DataTables](https://datatables.net/) JavaScript library
-
----
-
-class: fullscreen, middle, center
-
-<div id="htmlwidget-8d87ca057abbb17adc70" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8d87ca057abbb17adc70">{"x":{"filter":"none","caption":"<caption>Global population rates in 2013 per 1,000 population<\/caption>","data":[[2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013],["Global","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","High","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Low","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Lower-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle","Upper-middle",null,null,null,null,null,null],[null,"Andorra","Antigua and Barbuda","Australia","Austria","Bahamas","Bahrain","Barbados","Belgium","Brunei Darussalam","Canada","Chile","Croatia","Cyprus","Czechia","Denmark","Equatorial Guinea","Estonia","Finland","France","Germany","Greece","Iceland","Ireland","Israel","Italy","Japan","Kuwait","Latvia","Lithuania","Luxembourg","Malta","Monaco","Netherlands","New Zealand","Norway","Oman","Poland","Portugal","Qatar","Republic of Korea","Russian Federation","Saint Kitts and Nevis","San Marino","Saudi Arabia","Singapore","Slovakia","Slovenia","Spain","Sweden","Switzerland","Trinidad and Tobago","United Arab Emirates","United Kingdom of Great Britain and Northern Ireland","United States of America","Uruguay",null,"Afghanistan","Bangladesh","Benin","Burkina Faso","Burundi","Cambodia","Central African Republic","Chad","Comoros","Democratic People's Republic of Korea","Democratic Republic of the Congo","Eritrea","Ethiopia","Gambia","Guinea","Guinea-Bissau","Haiti","Kenya","Liberia","Madagascar","Malawi","Mali","Mozambique","Myanmar","Nepal","Niger","Rwanda","Sierra Leone","Somalia","Tajikistan","Togo","Uganda","United Republic of Tanzania","Zimbabwe",null,"Armenia","Bhutan","Bolivia (Plurinational State of)","Cabo Verde","Cameroon","Congo","Côte d'Ivoire","Djibouti","Egypt","El Salvador","Georgia","Ghana","Guatemala","Guyana","Honduras","India","Indonesia","Kiribati","Kyrgyzstan","Lao People's Democratic Republic","Lesotho","Mauritania","Micronesia (Federated States of)","Mongolia","Morocco","Nicaragua","Nigeria","Pakistan","Papua New Guinea","Paraguay","Philippines","Republic of Moldova","Samoa","Sao Tome and Principe","Senegal","Solomon Islands","South Sudan","Sri Lanka","Sudan","Swaziland","Syrian Arab Republic","Timor-Leste","Ukraine","Uzbekistan","Vanuatu","Viet Nam","Yemen","Zambia",null,"Albania","Algeria","Angola","Argentina","Azerbaijan","Belarus","Belize","Bosnia and Herzegovina","Botswana","Brazil","Bulgaria","China","Colombia","Cook Islands","Costa Rica","Cuba","Dominica","Dominican Republic","Ecuador","Fiji","Gabon","Grenada","Hungary","Iran (Islamic Republic of)","Iraq","Jamaica","Jordan","Kazakhstan","Lebanon","Libya","Malaysia","Maldives","Marshall Islands","Mauritius","Mexico","Montenegro","Namibia","Nauru","Palau","Panama","Peru","Romania","Saint Lucia","Saint Vincent and the Grenadines","Serbia","Seychelles","South Africa","Suriname","Thailand","The former Yugoslav republic of Macedonia","Tonga","Tunisia","Turkey","Turkmenistan","Tuvalu","Venezuela (Bolivarian Republic of)","Niue",null,null,null,null,null,null,null],["Global","Europe","Americas","Western Pacific","Europe","Americas","Eastern Mediterranean","Americas","Europe","Western Pacific","Americas","Americas","Europe","Europe","Europe","Europe","Africa","Europe","Europe","Europe","Europe","Europe","Europe","Europe","Europe","Europe","Western Pacific","Eastern Mediterranean","Europe","Europe","Europe","Europe","Europe","Europe","Western Pacific","Europe","Eastern Mediterranean","Europe","Europe","Eastern Mediterranean","Western Pacific","Europe","Americas","Europe","Eastern Mediterranean","Western Pacific","Europe","Europe","Europe","Europe","Europe","Americas","Eastern Mediterranean","Europe","Americas","Americas",null,"Eastern Mediterranean","South-East Asia","Africa","Africa","Africa","Western Pacific","Africa","Africa","Africa","South-East Asia","Africa","Africa","Africa","Africa","Africa","Africa","Americas","Africa","Africa","Africa","Africa","Africa","Africa","South-East Asia","South-East Asia","Africa","Africa","Africa","Eastern Mediterranean","Europe","Africa","Africa","Africa","Africa",null,"Europe","South-East Asia","Americas","Africa","Africa","Africa","Africa","Eastern Mediterranean","Eastern Mediterranean","Americas","Europe","Africa","Americas","Americas","Americas","South-East Asia","South-East Asia","Western Pacific","Europe","Western Pacific","Africa","Africa","Western Pacific","Western Pacific","Eastern Mediterranean","Americas","Africa","Eastern Mediterranean","Western Pacific","Americas","Western Pacific","Europe","Western Pacific","Africa","Africa","Western Pacific","Africa","South-East Asia","Eastern Mediterranean","Africa","Eastern Mediterranean","South-East Asia","Europe","Europe","Western Pacific","Western Pacific","Eastern Mediterranean","Africa",null,"Europe","Africa","Africa","Americas","Europe","Europe","Americas","Europe","Africa","Americas","Europe","Western Pacific","Americas","Western Pacific","Americas","Americas","Americas","Americas","Americas","Western Pacific","Africa","Americas","Europe","Eastern Mediterranean","Eastern Mediterranean","Americas","Eastern Mediterranean","Europe","Eastern Mediterranean","Eastern Mediterranean","Western Pacific","South-East Asia","Western Pacific","Africa","Americas","Europe","Africa","Western Pacific","Western Pacific","Americas","Americas","Europe","Americas","Americas","Europe","Africa","Africa","Americas","South-East Asia","Europe","Western Pacific","Eastern Mediterranean","Europe","Europe","Western Pacific","Americas","Western Pacific",null,"Africa","Americas","Eastern Mediterranean","Europe","South-East Asia","Western Pacific"],[23.4,8.9,16.5,13.2,9.5,15.3,15.2,12.7,11.7,15.5,11.3,13.9,9.5,11.5,11.1,11.3,35.4,10.9,11.2,12.3,8.5,9.7,14.5,15.4,20.3,9.2,8.4,20.6,11,11.3,11.6,9.2,6.8,10.7,13.8,12.4,20.9,10.8,8.7,11,9.6,11.8,13.8,8.8,19.4,9.9,10.7,10,10.4,12,10.4,14.5,14.5,12.2,13.2,14.5,12.1,34.1,20,36.4,40.9,44.7,25.7,34.2,45.9,35.2,14.4,42.7,36.7,33,42.7,36.9,37.5,25.6,34.9,35.5,34.7,39.8,47.1,38.9,17.2,21,49.7,35.2,36.6,43.8,33,36.4,43.2,39.2,31.3,35,13.7,19.6,25.7,20.1,37.3,37.6,36.6,27.5,23.2,20.1,13.3,30.9,31,20.3,25.8,20.4,18.8,23.3,27.1,26.8,27.5,34.1,23.5,22.7,22.7,22.7,41.2,25.2,28.9,23.7,24.4,12.1,26.2,33.9,37.7,30.8,36.1,17.9,33.5,29.9,24,35.8,10.8,21.5,26.6,15.5,31.1,42.8,25.1,12.9,24.3,44.1,16.8,17.8,11,23.4,9,23.6,14.9,9.6,13.3,18.8,14.9,15.1,9.5,15.6,20.8,20.8,20.4,31.9,19.3,9.9,18.8,31.1,18,27,20.5,13.4,20.7,17.7,22,27.2,11.5,18.4,11.6,26,26.4,10.9,19.4,19.7,10.3,15.4,16.3,9.7,16.6,20.9,17.7,10.2,10.7,25.5,17.2,16.8,21.3,23.6,19.8,null,16.6,38.3,17,26.2,13.6,19.9,14.7],[7.8,8.4,6.8,6.4,9,6.1,2.2,6.4,9.9,3.6,7.2,5.4,11.1,5.5,10,9.6,11.5,11.3,9.4,8.7,10.6,9.7,6.2,5.9,5.1,9.5,9.5,1.9,14.2,12,6.8,7.5,8.7,8.3,6.3,8.1,2.8,10,9.1,1.3,5.5,14.8,8.5,10.2,3.2,4.5,9.4,9.1,8.2,9.6,7.7,9.6,1.1,8.9,8.4,9.1,9.1,7.7,5.7,9.6,9.5,11.1,5.7,14,13.6,8.2,9.2,13.7,6.3,7.2,8.2,10.1,12.3,8.6,8.3,8,7,9,11.2,11.8,8.4,6.6,10.2,6.4,16.8,12.7,6,9.6,9.2,7.8,9.8,8.5,12.6,6.5,7,5.2,10.8,10.1,12.6,8.8,6.4,6.6,11.5,8.1,5.2,7.9,4.5,7.9,6.2,8.2,6.6,6.7,14.1,7.8,6.1,6.7,6.4,4.8,11.9,7.3,7.7,4.8,5.9,12.4,5.2,6.5,7,5.4,11.1,6.6,7.8,11.8,3.5,6,15.1,6.4,4.5,5.8,6.7,9.7,7.9,9.4,5.7,13.9,7.6,6.3,13.5,4,9.4,7.2,6.1,14.2,7.2,4.2,5,4.4,8.5,7.2,5.9,5.3,6.9,9,6.9,13,5.1,4.8,7.1,3.7,9.7,4.4,4.2,5,3.5,6.6,7.4,5.3,9.5,5.7,3.5,5.9,5,4.4,11.8,7,6.5,11.9,6.7,11.1,4.6,7.6,9.4,6.7,5.5,5.7,8.8,8.7,4.8,5.9,6.9,10.1,6.7,6.2,10.2,7.5,7.1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>year<\/th>\n      <th>World Bank Income Group<\/th>\n      <th>country<\/th>\n      <th>region<\/th>\n      <th>Crude birth rate<\/th>\n      <th>Crude death rate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15],"columnDefs":[{"className":"dt-right","targets":[0,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -1161,80 +752,22 @@ leaflet(df) %&gt;%
 
 class: fullscreen, middle, center
 
-<div id="htmlwidget-3e12195084a968e94b75" style="width:100%;height:100%;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3e12195084a968e94b75">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap.Mapnik",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addCircleMarkers","args":[37.8719032,-122.2664164,10,null,null,{"lineCap":null,"lineJoin":null,"clickable":true,"pointerEvents":null,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2,"dashArray":null},null,null,"University Hall",null,null,null,null]}],"setView":[[37.8718992,-122.2585399],16,[]],"limits":{"lat":[37.8719032,37.8719032],"lng":[-122.2664164,-122.2664164]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b4e85d1e79c3de087489" style="width:100%;height:100%;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b4e85d1e79c3de087489">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap.Mapnik",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[37.8719032,-122.2664164,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,"University Hall",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"setView":[[37.8718992,-122.2585399],16,[]],"limits":{"lat":[37.8719032,37.8719032],"lng":[-122.2664164,-122.2664164]}},"evals":[],"jsHooks":[]}</script>
 
----
-
-# `leaflet`
-
-
-
-
-```r
-head(subset(yll_bycondition,
-            select = c(country, longitude, latitude, value)), 2)
-```
-
-```
-##             country longitude latitude value
-## 4             China  105.0000     35.0    11
-## 7 Brunei Darussalam  114.6667      4.5    12
-```
-
-
-```r
-pal = colorNumeric(palette = "plasma",
-                   domain = yll_bycondition$value)
-
-yll_bycondition$popup_label = paste0(yll_bycondition$country, ": ",
-                                     yll_bycondition$value, "%")
-
-leaflet(yll_bycondition) %&gt;%
-    addProviderTiles(providers$CartoDB.DarkMatter) %&gt;%
-    addCircleMarkers(lng = ~longitude, lat = ~latitude,
-                     popup = ~popup_label,
-                     color = ~pal(value), fillColor = ~pal(value)) %&gt;%
-    addLegend("bottomright", pal = pal, values = ~value,
-              title = "Population's&lt;br/&gt;years of life lost&lt;br/&gt;to communicable&lt;br/&gt;&amp; other group I&lt;br/&gt;conditions",
-              labFormat = labelFormat(suffix = "%"), opacity = 0.8)
-```
-
-* Even better: use polygons to outline the countries instead of circle markers at their centers. See `addPolygons()`, `addGeoJSON()`, etc.
 
 ---
 
 class: fullscreen, middle, center
 
-<div id="htmlwidget-55a6427ac415e056d658" style="width:100%;height:100%;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-55a6427ac415e056d658">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.DarkMatter",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addCircleMarkers","args":[[35,4.5,40,-17,24.25,16,-18,-2,59,35,56,13.46666666,15.5,20,6.5,25,56,3.25,46,44,46.11666666,35,39,60,-8,48.66666666,-20,13.16666666,-30,17.25,13,-3.5,40.5,41,0,42,8,65,31,35.83333333,-29.5,8.5,11,34,30,-6,46,15,14,15,8,24,-27,-10,53,6,-12.16666666,47,-5,48,18,11.5,54,19,40,8,49.75,41.83333333,-20.28333333,-22,16,-41,9,-10,8,15,-6,-33,16.16666666,7,60,-12.5,26,0,19,53,5,12,45.16666666,49.75,27,46,18.25,-13.5,2.5,10,23,22,-18.25,1,37,29.5,32,47,13,39.5,-23,62,28,41,15,7,1,38,-29,27.5,44,43,9.5,47.33333333,4,10,21.5,51,28,64,2,39,15,33,31.47,36,41,7,17,13,25,-2,1.36666666,52.5,21,4,39,-22,47,50.83333333,-34,24,33,-1,15,32,11,42.83333333,33.83333333,13,42.5,57,-20,20,13.83333333,25.5,52,40,-8.83333333,62,-26.5,40,10,49,8,-15],[105,114.66666666,45,-65,-76,-24,175,-77.5,26,33,10,-16.56666666,-90.25,77,-9.5,17,24,73,105,21,14.81666666,38,71,100,159,19.5,30,-59.53333333,-71,-88.75,-2,30,47.5,20,25,43.5,-2,-18,36,14.58333333,28.5,-11.5,-61,9,70,147,25,30,-14,48,-5,90,133,-55,28,12,44.25,20,120,68,105,43,-2,-70.66666666,-4,38,6.16666666,22,57.55,17,8,174,-80,-76,1.16666666,100,35,-56,107.83333333,21,-95,18.5,50.55,25,-72.41666666,-8,-59,-15,15.5,15.5,30,2,-77.5,34,112.5,8,-102,98,35,38,127.5,45.75,-5,29,122,-8,-58,10,84,64,19,30,32,-97,24,90.5,18,25,2.25,13.33333333,-72,-84,-80,9,3,26,10,22,-86.5,44,35.13,138,75,81,-4,-85,45,30,103.8,5.75,57,-56,35,24,8,4,-64,54,65,11.75,39,53,-10,12.83333333,35.83333333,105,19.3,25,47,-12,-88.91666666,51.25,20,127,125.91666666,15,31.5,60,49,32,-66,30],10,null,null,{"lineCap":null,"lineJoin":null,"clickable":true,"pointerEvents":null,"className":"","stroke":true,"color":["#48039F","#4D02A2","#38049A","#C23C81","#B7318A","#B02991","#7201A8","#930FA3","#1F068F","#1F068F","#2C0594","#FDB32F","#D14E72","#CE4B75","#FEBD2A","#6700A8","#1F068F","#7701A8","#7701A8","#17078B","#17078B","#43039E","#E26561","#43039E","#CC4779","#2C0594","#FBD724","#6300A7","#43039E","#9C179E","#FEBD2A","#FEBD2A","#8A09A5","#3E049C","#FCCD25","#3E049C","#FBA03A","#1F068F","#8E0CA4","#260591","#FBD724","#FCD225","#5302A3","#6D00A8","#EF7D51","#F48948","#320597","#FBA03A","#FDB32F","#F68E45","#FEBD2A","#D7566C","#260591","#6700A8","#260591","#FEBD2A","#FBA03A","#17078B","#BB3488","#4D02A2","#F79242","#FDAE32","#320597","#A41F99","#2C0594","#FEBD2A","#260591","#1F068F","#48039F","#F79242","#F6E826","#2C0594","#8E0CA4","#A01A9C","#FDC727","#8004A8","#FEB82C","#43039E","#8E0CA4","#F0F921","#320597","#FBD724","#6300A7","#F9DD25","#F3854B","#2C0594","#930FA3","#FBD724","#0D0887","#260591","#7701A8","#2C0594","#8E0CA4","#F7E225","#7701A8","#FCD225","#6300A7","#CE4B75","#FCD225","#FCCD25","#38049A","#7B02A8","#A41F99","#38049A","#B42D8D","#43039E","#8E0CA4","#2C0594","#D45270","#9C179E","#F0F921","#FCCD25","#FEB82C","#38049A","#FA9B3D","#B42D8D","#1F068F","#260591","#FDB32F","#17078B","#7701A8","#43039E","#320597","#260591","#8A09A5","#0D0887","#FEB82C","#2C0594","#B7318A","#B42D8D","#43039E","#43039E","#8506A6","#5801A4","#FCCD25","#930FA3","#6D00A8","#FA9B3D","#5D01A6","#2C0594","#8A09A5","#8E0CA4","#5801A4","#FDAE32","#260591","#320597","#6300A7","#6700A8","#F48948","#FEB82C","#FA9B3D","#6D00A8","#FDC727","#260591","#48039F","#DE6164","#1F068F","#1F068F","#FBA03A","#FDC229","#6D00A8","#48039F","#1F068F","#6700A8","#FA9B3D","#260591","#FCCD25","#8A09A5","#F7E225","#43039E","#6300A7","#F9DD25"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#48039F","#4D02A2","#38049A","#C23C81","#B7318A","#B02991","#7201A8","#930FA3","#1F068F","#1F068F","#2C0594","#FDB32F","#D14E72","#CE4B75","#FEBD2A","#6700A8","#1F068F","#7701A8","#7701A8","#17078B","#17078B","#43039E","#E26561","#43039E","#CC4779","#2C0594","#FBD724","#6300A7","#43039E","#9C179E","#FEBD2A","#FEBD2A","#8A09A5","#3E049C","#FCCD25","#3E049C","#FBA03A","#1F068F","#8E0CA4","#260591","#FBD724","#FCD225","#5302A3","#6D00A8","#EF7D51","#F48948","#320597","#FBA03A","#FDB32F","#F68E45","#FEBD2A","#D7566C","#260591","#6700A8","#260591","#FEBD2A","#FBA03A","#17078B","#BB3488","#4D02A2","#F79242","#FDAE32","#320597","#A41F99","#2C0594","#FEBD2A","#260591","#1F068F","#48039F","#F79242","#F6E826","#2C0594","#8E0CA4","#A01A9C","#FDC727","#8004A8","#FEB82C","#43039E","#8E0CA4","#F0F921","#320597","#FBD724","#6300A7","#F9DD25","#F3854B","#2C0594","#930FA3","#FBD724","#0D0887","#260591","#7701A8","#2C0594","#8E0CA4","#F7E225","#7701A8","#FCD225","#6300A7","#CE4B75","#FCD225","#FCCD25","#38049A","#7B02A8","#A41F99","#38049A","#B42D8D","#43039E","#8E0CA4","#2C0594","#D45270","#9C179E","#F0F921","#FCCD25","#FEB82C","#38049A","#FA9B3D","#B42D8D","#1F068F","#260591","#FDB32F","#17078B","#7701A8","#43039E","#320597","#260591","#8A09A5","#0D0887","#FEB82C","#2C0594","#B7318A","#B42D8D","#43039E","#43039E","#8506A6","#5801A4","#FCCD25","#930FA3","#6D00A8","#FA9B3D","#5D01A6","#2C0594","#8A09A5","#8E0CA4","#5801A4","#FDAE32","#260591","#320597","#6300A7","#6700A8","#F48948","#FEB82C","#FA9B3D","#6D00A8","#FDC727","#260591","#48039F","#DE6164","#1F068F","#1F068F","#FBA03A","#FDC229","#6D00A8","#48039F","#1F068F","#6700A8","#FA9B3D","#260591","#FCCD25","#8A09A5","#F7E225","#43039E","#6300A7","#F9DD25"],"fillOpacity":0.2,"dashArray":null},null,null,["China: 11%","Brunei Darussalam: 12%","Armenia: 8%","Bolivia (Plurinational State of): 38%","Bahamas: 35%","Cabo Verde: 33%","Fiji: 19%","Ecuador: 26%","Estonia: 4%","Cyprus: 4%","Denmark: 6%","Gambia: 67%","Guatemala: 43%","India: 42%","Liberia: 69%","Libya: 17%","Lithuania: 4%","Maldives: 20%","Mongolia: 20%","Serbia: 3%","Slovenia: 3%","Syrian Arab Republic: 10%","Tajikistan: 49%","Russian Federation: 10%","Solomon Islands: 41%","Slovakia: 6%","Zimbabwe: 74%","Barbados: 16%","Chile: 10%","Belize: 28%","Burkina Faso: 69%","Burundi: 69%","Azerbaijan: 24%","Albania: 9%","Congo: 72%","Georgia: 9%","Ghana: 63%","Iceland: 4%","Jordan: 25%","Malta: 5%","Lesotho: 74%","Sierra Leone: 73%","Trinidad and Tobago: 13%","Tunisia: 18%","Pakistan: 55%","Papua New Guinea: 58%","Romania: 7%","Sudan: 63%","Senegal: 67%","Yemen: 59%","Côte d'Ivoire: 69%","Bangladesh: 45%","Australia: 5%","Brazil: 17%","Belarus: 5%","Cameroon: 69%","Comoros: 63%","Hungary: 3%","Indonesia: 36%","Kazakhstan: 12%","Lao People's Democratic Republic: 60%","Djibouti: 66%","United Kingdom of Great Britain and Northern Ireland: 7%","Dominican Republic: 30%","Spain: 6%","Ethiopia: 69%","Luxembourg: 5%","The former Yugoslav republic of Macedonia: 4%","Mauritius: 11%","Namibia: 60%","Niger: 77%","New Zealand: 6%","Panama: 25%","Peru: 29%","Togo: 71%","Thailand: 22%","United Republic of Tanzania: 68%","Uruguay: 10%","Viet Nam: 25%","Central African Republic: 80%","Canada: 7%","Angola: 74%","Bahrain: 16%","Democratic Republic of the Congo: 75%","Haiti: 57%","Ireland: 6%","Guyana: 26%","Guinea-Bissau: 74%","Croatia: 2%","Czechia: 5%","Egypt: 20%","France: 6%","Jamaica: 25%","Malawi: 76%","Malaysia: 20%","Nigeria: 73%","Mexico: 16%","Myanmar: 42%","Mozambique: 73%","Kenya: 72%","Republic of Korea: 8%","Kuwait: 21%","Morocco: 30%","Republic of Moldova: 8%","Philippines: 34%","Portugal: 10%","Paraguay: 25%","Norway: 6%","Nepal: 44%","Uzbekistan: 28%","Chad: 80%","South Sudan: 72%","Uganda: 68%","United States of America: 8%","South Africa: 62%","Bhutan: 34%","Bosnia and Herzegovina: 4%","Bulgaria: 5%","Benin: 67%","Austria: 3%","Colombia: 20%","Costa Rica: 10%","Cuba: 7%","Germany: 5%","Algeria: 24%","Finland: 2%","Equatorial Guinea: 68%","Greece: 6%","Honduras: 35%","Iraq: 34%","Israel: 10%","Japan: 10%","Kyrgyzstan: 23%","Sri Lanka: 14%","Mali: 72%","Nicaragua: 26%","Saudi Arabia: 18%","Rwanda: 62%","Singapore: 15%","Netherlands: 6%","Oman: 24%","Suriname: 25%","Turkey: 14%","Botswana: 66%","Switzerland: 5%","Belgium: 7%","Argentina: 16%","United Arab Emirates: 17%","Afghanistan: 58%","Gabon: 68%","Eritrea: 62%","Iran (Islamic Republic of): 18%","Guinea: 71%","Italy: 5%","Lebanon: 11%","Cambodia: 48%","Montenegro: 4%","Latvia: 4%","Madagascar: 63%","Mauritania: 70%","El Salvador: 18%","Qatar: 11%","Poland: 4%","Democratic People's Republic of Korea: 17%","Timor-Leste: 62%","Sweden: 5%","Swaziland: 72%","Turkmenistan: 24%","Somalia: 76%","Ukraine: 10%","Venezuela (Bolivarian Republic of): 16%","Zambia: 75%"],null,null,null,null]},{"method":"addLegend","args":[{"colors":["#0D0887 , #43039E 10.2564102564103%, #7701A8 23.0769230769231%, #A41F99 35.8974358974359%, #C8437B 48.7179487179487%, #E4695E 61.5384615384615%, #F79242 74.3589743589744%, #FDC229 87.1794871794872%, #F0F921 100%, #F0F921 "],"labels":["10%","20%","30%","40%","50%","60%","70%","80%"],"na_color":null,"na_label":"NA","opacity":0.8,"position":"bottomright","type":"numeric","title":"Population's<br/>years of life lost<br/>to communicable<br/>& other group I<br/>conditions","extra":{"p_1":0.102564102564103,"p_n":1},"layerId":null,"className":"info legend"}]}],"limits":{"lat":[-41,65],"lng":[-102,175]}},"evals":[],"jsHooks":[]}</script>
-
----
-
-# `rbokeh`
 
 
-```r
-library(rbokeh)
-p &lt;- figure(data = subset(who_cbdr, !is.na(country)),
-            width = 800, height = 600,
-            title = "Global population rates in 2013 per 1,000 population") %&gt;%
-    ly_points(value.birthsper1000, value.deathsper1000,
-              color = worldbankincomegroup,
-              hover = list(country,
-                           value.birthsper1000,
-                           value.deathsper1000)) %&gt;%
-    x_axis(label = "Crude Birth Rate") %&gt;%
-    y_axis(label = "Crude Death Rate")
-p
-```
 
 ---
 
 class: fullscreen, middle, center
 
-<div id="htmlwidget-5579e4dd63c6f56fb666" style="width:800px;height:600px;" class="rbokeh html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5579e4dd63c6f56fb666">{"x":{"elementid":"07164e7ff5eb2797e6c079417a1f1f9e","modeltype":"Plot","modelid":"867cff8f8bff17555b0ae6f0a00d6ab7","docid":"460809a7c9fec1be70670174fdf903cf","docs_json":{"460809a7c9fec1be70670174fdf903cf":{"version":"0.12.2","title":"Bokeh Figure","roots":{"root_ids":["867cff8f8bff17555b0ae6f0a00d6ab7"],"references":[{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","attributes":{"id":"867cff8f8bff17555b0ae6f0a00d6ab7","plot_width":800,"plot_height":600,"sizing_mode":"scale_both","x_range":{"type":"Range1d","id":"97c263cb61d0a053b15693a3f2abc631"},"y_range":{"type":"Range1d","id":"c7a821bca304fb3a37ebaf4ab1cfcd44"},"left":[{"type":"LinearAxis","id":"abc2e133183da8dd658168f4ea68df97"}],"below":[{"type":"LinearAxis","id":"93f061eb8f6911c8d05555bfa89468d3"}],"right":[],"above":[],"renderers":[{"type":"BoxAnnotation","id":"f237490b0ffd0b3f58780451ac984aff"},{"type":"GlyphRenderer","id":"e9b18009d72a5c96f5e9f1ff6f416cb3"},{"type":"LinearAxis","id":"93f061eb8f6911c8d05555bfa89468d3"},{"type":"Grid","id":"57f5d43e50454a243e5eb36fa4305079"},{"type":"LinearAxis","id":"abc2e133183da8dd658168f4ea68df97"},{"type":"Grid","id":"ea117aa9f2a0236fae5887a5ad95f4c9"},{"type":"GlyphRenderer","id":"2b417ac3aaf885bf575503f751ba30b8"},{"type":"GlyphRenderer","id":"3faffe25431e99808116983ce195fb48"},{"type":"GlyphRenderer","id":"57e1fdab56ec77e64ae8091a80bc29ef"},{"type":"GlyphRenderer","id":"ea4cc9214babc59e33a9e0e535eb5313"},{"type":"Legend","id":"f86dee6a2037fe10b38a71858fd0850b"}],"extra_y_ranges":{},"extra_x_ranges":{},"tags":[],"min_border_left":4,"min_border_right":4,"min_border_top":4,"min_border_bottom":4,"lod_threshold":null,"toolbar":{"type":"Toolbar","id":"a497eda30248da26c1384cce92529b77"},"tool_events":{"type":"ToolEvents","id":"a078c5e2c452d049a88e6caef8353444"},"title":{"type":"Title","id":"9470e923e9439eb5dc50a440a13bef97"}},"subtype":"Figure"},{"type":"Toolbar","id":"a497eda30248da26c1384cce92529b77","attributes":{"id":"a497eda30248da26c1384cce92529b77","tags":[],"active_drag":"auto","active_scroll":"auto","active_tap":"auto","tools":[{"type":"PanTool","id":"97005ce1df0c756f70691a4e6676b507"},{"type":"WheelZoomTool","id":"059485f8aa2ff85f602df7b24f431c3f"},{"type":"BoxZoomTool","id":"d7523ba847c840c91f789f12e284678b"},{"type":"ResetTool","id":"274030f2ac7c485a5378c8bd4b2eb443"},{"type":"SaveTool","id":"1fbc81af62e4461bde5c780e953a313e"},{"type":"HelpTool","id":"c5803b5d101c6c753f6521a561ecc1e9"},{"type":"HoverTool","id":"221b26393c56feb0406a5d4704f8581a"}],"logo":null}},{"type":"PanTool","id":"97005ce1df0c756f70691a4e6676b507","attributes":{"id":"97005ce1df0c756f70691a4e6676b507","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"dimensions":["width","height"]}},{"type":"ToolEvents","id":"a078c5e2c452d049a88e6caef8353444","attributes":{"id":"a078c5e2c452d049a88e6caef8353444","tags":[]},"geometries":[]},{"type":"WheelZoomTool","id":"059485f8aa2ff85f602df7b24f431c3f","attributes":{"id":"059485f8aa2ff85f602df7b24f431c3f","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"dimensions":["width","height"]}},{"type":"BoxAnnotation","id":"f237490b0ffd0b3f58780451ac984aff","attributes":{"id":"f237490b0ffd0b3f58780451ac984aff","tags":[],"line_color":{"units":"data","value":"black"},"line_alpha":{"units":"data","value":1},"fill_color":{"units":"data","value":"lightgrey"},"fill_alpha":{"units":"data","value":0.5},"line_dash":[4,4],"line_width":{"units":"data","value":2},"level":"overlay","top_units":"screen","bottom_units":"screen","left_units":"screen","right_units":"screen","render_mode":"css"}},{"type":"BoxZoomTool","id":"d7523ba847c840c91f789f12e284678b","attributes":{"id":"d7523ba847c840c91f789f12e284678b","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"overlay":{"type":"BoxAnnotation","id":"f237490b0ffd0b3f58780451ac984aff"}}},{"type":"ResetTool","id":"274030f2ac7c485a5378c8bd4b2eb443","attributes":{"id":"274030f2ac7c485a5378c8bd4b2eb443","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"}}},{"type":"SaveTool","id":"1fbc81af62e4461bde5c780e953a313e","attributes":{"id":"1fbc81af62e4461bde5c780e953a313e","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"}}},{"type":"HelpTool","id":"c5803b5d101c6c753f6521a561ecc1e9","attributes":{"id":"c5803b5d101c6c753f6521a561ecc1e9","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"redirect":"http://hafen.github.io/rbokeh","help_tooltip":"Click to learn more about rbokeh."}},{"type":"Title","id":"9470e923e9439eb5dc50a440a13bef97","attributes":{"id":"9470e923e9439eb5dc50a440a13bef97","tags":[],"plot":null,"text":"Global population rates in 2013 per 1,000 population"}},{"type":"HoverTool","id":"221b26393c56feb0406a5d4704f8581a","attributes":{"id":"221b26393c56feb0406a5d4704f8581a","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"renderers":[{"type":"GlyphRenderer","id":"e9b18009d72a5c96f5e9f1ff6f416cb3"}],"names":[],"anchor":"center","attachment":"horizontal","line_policy":"prev","mode":"mouse","point_policy":"snap_to_data","tooltips":[["country","@hover_col_1"],["value.birthsper1000","@hover_col_2"],["value.deathsper1000","@hover_col_3"]]}},{"type":"ColumnDataSource","id":"f6218510521d446a9dbd1b741e398c16","attributes":{"id":"f6218510521d446a9dbd1b741e398c16","tags":[],"column_names":["x","y","line_color","fill_color","hover_col_1","hover_col_2","hover_col_3"],"selected":[],"data":{"x":[8.9,16.5,13.2,9.5,15.3,15.2,12.7,11.7,15.5,11.3,13.9,9.5,11.5,11.1,11.3,35.4,10.9,11.2,12.3,8.5,9.7,14.5,15.4,20.3,9.2,8.4,20.6,11,11.3,11.6,9.2,6.8,10.7,13.8,12.4,20.9,10.8,8.7,11,9.6,11.8,13.8,8.8,19.4,9.9,10.7,10,10.4,12,10.4,14.5,14.5,12.2,13.2,14.5,34.1,20,36.4,40.9,44.7,25.7,34.2,45.9,35.2,14.4,42.7,36.7,33,42.7,36.9,37.5,25.6,34.9,35.5,34.7,39.8,47.1,38.9,17.2,21,49.7,35.2,36.6,43.8,33,36.4,43.2,39.2,31.3,13.7,19.6,25.7,20.1,37.3,37.6,36.6,27.5,23.2,20.1,13.3,30.9,31,20.3,25.8,20.4,18.8,23.3,27.1,26.8,27.5,34.1,23.5,22.7,22.7,22.7,41.2,25.2,28.9,23.7,24.4,12.1,26.2,33.9,37.7,30.8,36.1,17.9,33.5,29.9,24,35.8,10.8,21.5,26.6,15.5,31.1,42.8,12.9,24.3,44.1,16.8,17.8,11,23.4,9,23.6,14.9,9.6,13.3,18.8,14.9,15.1,9.5,15.6,20.8,20.8,20.4,31.9,19.3,9.9,18.8,31.1,18,27,20.5,13.4,20.7,17.7,22,27.2,11.5,18.4,11.6,26,26.4,10.9,19.4,19.7,10.3,15.4,16.3,9.7,16.6,20.9,17.7,10.2,10.7,25.5,17.2,16.8,21.3,23.6,19.8,null],"y":[8.4,6.8,6.4,9,6.1,2.2,6.4,9.9,3.6,7.2,5.4,11.1,5.5,10,9.6,11.5,11.3,9.4,8.7,10.6,9.7,6.2,5.9,5.1,9.5,9.5,1.9,14.2,12,6.8,7.5,8.7,8.3,6.3,8.1,2.8,10,9.1,1.3,5.5,14.8,8.5,10.2,3.2,4.5,9.4,9.1,8.2,9.6,7.7,9.6,1.1,8.9,8.4,9.1,7.7,5.7,9.6,9.5,11.1,5.7,14,13.6,8.2,9.2,13.7,6.3,7.2,8.2,10.1,12.3,8.6,8.3,8,7,9,11.2,11.8,8.4,6.6,10.2,6.4,16.8,12.7,6,9.6,9.2,7.8,9.8,12.6,6.5,7,5.2,10.8,10.1,12.6,8.8,6.4,6.6,11.5,8.1,5.2,7.9,4.5,7.9,6.2,8.2,6.6,6.7,14.1,7.8,6.1,6.7,6.4,4.8,11.9,7.3,7.7,4.8,5.9,12.4,5.2,6.5,7,5.4,11.1,6.6,7.8,11.8,3.5,6,15.1,6.4,4.5,5.8,6.7,9.7,9.4,5.7,13.9,7.6,6.3,13.5,4,9.4,7.2,6.1,14.2,7.2,4.2,5,4.4,8.5,7.2,5.9,5.3,6.9,9,6.9,13,5.1,4.8,7.1,3.7,9.7,4.4,4.2,5,3.5,6.6,7.4,5.3,9.5,5.7,3.5,5.9,5,4.4,11.8,7,6.5,11.9,6.7,11.1,4.6,7.6,9.4,6.7,5.5,5.7,8.8,8.7,4.8,5.9],"line_color":["#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728"],"fill_color":["#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#1F77B4","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#FF7F0E","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#2CA02C","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728","#D62728"],"hover_col_1":["Andorra                                             ","Antigua and Barbuda                                 ","Australia                                           ","Austria                                             ","Bahamas                                             ","Bahrain                                             ","Barbados                                            ","Belgium                                             ","Brunei Darussalam                                   ","Canada                                              ","Chile                                               ","Croatia                                             ","Cyprus                                              ","Czechia                                             ","Denmark                                             ","Equatorial Guinea                                   ","Estonia                                             ","Finland                                             ","France                                              ","Germany                                             ","Greece                                              ","Iceland                                             ","Ireland                                             ","Israel                                              ","Italy                                               ","Japan                                               ","Kuwait                                              ","Latvia                                              ","Lithuania                                           ","Luxembourg                                          ","Malta                                               ","Monaco                                              ","Netherlands                                         ","New Zealand                                         ","Norway                                              ","Oman                                                ","Poland                                              ","Portugal                                            ","Qatar                                               ","Republic of Korea                                   ","Russian Federation                                  ","Saint Kitts and Nevis                               ","San Marino                                          ","Saudi Arabia                                        ","Singapore                                           ","Slovakia                                            ","Slovenia                                            ","Spain                                               ","Sweden                                              ","Switzerland                                         ","Trinidad and Tobago                                 ","United Arab Emirates                                ","United Kingdom of Great Britain and Northern Ireland","United States of America                            ","Uruguay                                             ","Afghanistan                                         ","Bangladesh                                          ","Benin                                               ","Burkina Faso                                        ","Burundi                                             ","Cambodia                                            ","Central African Republic                            ","Chad                                                ","Comoros                                             ","Democratic People's Republic of Korea               ","Democratic Republic of the Congo                    ","Eritrea                                             ","Ethiopia                                            ","Gambia                                              ","Guinea                                              ","Guinea-Bissau                                       ","Haiti                                               ","Kenya                                               ","Liberia                                             ","Madagascar                                          ","Malawi                                              ","Mali                                                ","Mozambique                                          ","Myanmar                                             ","Nepal                                               ","Niger                                               ","Rwanda                                              ","Sierra Leone                                        ","Somalia                                             ","Tajikistan                                          ","Togo                                                ","Uganda                                              ","United Republic of Tanzania                         ","Zimbabwe                                            ","Armenia                                             ","Bhutan                                              ","Bolivia (Plurinational State of)                    ","Cabo Verde                                          ","Cameroon                                            ","Congo                                               ","Côte d'Ivoire                                       ","Djibouti                                            ","Egypt                                               ","El Salvador                                         ","Georgia                                             ","Ghana                                               ","Guatemala                                           ","Guyana                                              ","Honduras                                            ","India                                               ","Indonesia                                           ","Kiribati                                            ","Kyrgyzstan                                          ","Lao People's Democratic Republic                    ","Lesotho                                             ","Mauritania                                          ","Micronesia (Federated States of)                    ","Mongolia                                            ","Morocco                                             ","Nicaragua                                           ","Nigeria                                             ","Pakistan                                            ","Papua New Guinea                                    ","Paraguay                                            ","Philippines                                         ","Republic of Moldova                                 ","Samoa                                               ","Sao Tome and Principe                               ","Senegal                                             ","Solomon Islands                                     ","South Sudan                                         ","Sri Lanka                                           ","Sudan                                               ","Swaziland                                           ","Syrian Arab Republic                                ","Timor-Leste                                         ","Ukraine                                             ","Uzbekistan                                          ","Vanuatu                                             ","Viet Nam                                            ","Yemen                                               ","Zambia                                              ","Albania                                             ","Algeria                                             ","Angola                                              ","Argentina                                           ","Azerbaijan                                          ","Belarus                                             ","Belize                                              ","Bosnia and Herzegovina                              ","Botswana                                            ","Brazil                                              ","Bulgaria                                            ","China                                               ","Colombia                                            ","Cook Islands                                        ","Costa Rica                                          ","Cuba                                                ","Dominica                                            ","Dominican Republic                                  ","Ecuador                                             ","Fiji                                                ","Gabon                                               ","Grenada                                             ","Hungary                                             ","Iran (Islamic Republic of)                          ","Iraq                                                ","Jamaica                                             ","Jordan                                              ","Kazakhstan                                          ","Lebanon                                             ","Libya                                               ","Malaysia                                            ","Maldives                                            ","Marshall Islands                                    ","Mauritius                                           ","Mexico                                              ","Montenegro                                          ","Namibia                                             ","Nauru                                               ","Palau                                               ","Panama                                              ","Peru                                                ","Romania                                             ","Saint Lucia                                         ","Saint Vincent and the Grenadines                    ","Serbia                                              ","Seychelles                                          ","South Africa                                        ","Suriname                                            ","Thailand                                            ","The former Yugoslav republic of Macedonia           ","Tonga                                               ","Tunisia                                             ","Turkey                                              ","Turkmenistan                                        ","Tuvalu                                              ","Venezuela (Bolivarian Republic of)                  ","Niue                                                "],"hover_col_2":[" 8.9","16.5","13.2"," 9.5","15.3","15.2","12.7","11.7","15.5","11.3","13.9"," 9.5","11.5","11.1","11.3","35.4","10.9","11.2","12.3"," 8.5"," 9.7","14.5","15.4","20.3"," 9.2"," 8.4","20.6","11.0","11.3","11.6"," 9.2"," 6.8","10.7","13.8","12.4","20.9","10.8"," 8.7","11.0"," 9.6","11.8","13.8"," 8.8","19.4"," 9.9","10.7","10.0","10.4","12.0","10.4","14.5","14.5","12.2","13.2","14.5","34.1","20.0","36.4","40.9","44.7","25.7","34.2","45.9","35.2","14.4","42.7","36.7","33.0","42.7","36.9","37.5","25.6","34.9","35.5","34.7","39.8","47.1","38.9","17.2","21.0","49.7","35.2","36.6","43.8","33.0","36.4","43.2","39.2","31.3","13.7","19.6","25.7","20.1","37.3","37.6","36.6","27.5","23.2","20.1","13.3","30.9","31.0","20.3","25.8","20.4","18.8","23.3","27.1","26.8","27.5","34.1","23.5","22.7","22.7","22.7","41.2","25.2","28.9","23.7","24.4","12.1","26.2","33.9","37.7","30.8","36.1","17.9","33.5","29.9","24.0","35.8","10.8","21.5","26.6","15.5","31.1","42.8","12.9","24.3","44.1","16.8","17.8","11.0","23.4"," 9.0","23.6","14.9"," 9.6","13.3","18.8","14.9","15.1"," 9.5","15.6","20.8","20.8","20.4","31.9","19.3"," 9.9","18.8","31.1","18.0","27.0","20.5","13.4","20.7","17.7","22.0","27.2","11.5","18.4","11.6","26.0","26.4","10.9","19.4","19.7","10.3","15.4","16.3"," 9.7","16.6","20.9","17.7","10.2","10.7","25.5","17.2","16.8","21.3","23.6","19.8","  NA"],"hover_col_3":[" 8.4"," 6.8"," 6.4"," 9.0"," 6.1"," 2.2"," 6.4"," 9.9"," 3.6"," 7.2"," 5.4","11.1"," 5.5","10.0"," 9.6","11.5","11.3"," 9.4"," 8.7","10.6"," 9.7"," 6.2"," 5.9"," 5.1"," 9.5"," 9.5"," 1.9","14.2","12.0"," 6.8"," 7.5"," 8.7"," 8.3"," 6.3"," 8.1"," 2.8","10.0"," 9.1"," 1.3"," 5.5","14.8"," 8.5","10.2"," 3.2"," 4.5"," 9.4"," 9.1"," 8.2"," 9.6"," 7.7"," 9.6"," 1.1"," 8.9"," 8.4"," 9.1"," 7.7"," 5.7"," 9.6"," 9.5","11.1"," 5.7","14.0","13.6"," 8.2"," 9.2","13.7"," 6.3"," 7.2"," 8.2","10.1","12.3"," 8.6"," 8.3"," 8.0"," 7.0"," 9.0","11.2","11.8"," 8.4"," 6.6","10.2"," 6.4","16.8","12.7"," 6.0"," 9.6"," 9.2"," 7.8"," 9.8","12.6"," 6.5"," 7.0"," 5.2","10.8","10.1","12.6"," 8.8"," 6.4"," 6.6","11.5"," 8.1"," 5.2"," 7.9"," 4.5"," 7.9"," 6.2"," 8.2"," 6.6"," 6.7","14.1"," 7.8"," 6.1"," 6.7"," 6.4"," 4.8","11.9"," 7.3"," 7.7"," 4.8"," 5.9","12.4"," 5.2"," 6.5"," 7.0"," 5.4","11.1"," 6.6"," 7.8","11.8"," 3.5"," 6.0","15.1"," 6.4"," 4.5"," 5.8"," 6.7"," 9.7"," 9.4"," 5.7","13.9"," 7.6"," 6.3","13.5"," 4.0"," 9.4"," 7.2"," 6.1","14.2"," 7.2"," 4.2"," 5.0"," 4.4"," 8.5"," 7.2"," 5.9"," 5.3"," 6.9"," 9.0"," 6.9","13.0"," 5.1"," 4.8"," 7.1"," 3.7"," 9.7"," 4.4"," 4.2"," 5.0"," 3.5"," 6.6"," 7.4"," 5.3"," 9.5"," 5.7"," 3.5"," 5.9"," 5.0"," 4.4","11.8"," 7.0"," 6.5","11.9"," 6.7","11.1"," 4.6"," 7.6"," 9.4"," 6.7"," 5.5"," 5.7"," 8.8"," 8.7"," 4.8"," 5.9"]}}},{"type":"Circle","id":"33c558a48eb09ce5a9f96b8d3fb8c315","attributes":{"id":"33c558a48eb09ce5a9f96b8d3fb8c315","tags":[],"size":{"units":"screen","value":10},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"},"line_color":{"units":"data","field":"line_color"},"fill_color":{"units":"data","field":"fill_color"}}},{"type":"Circle","id":"4694a8892044365aba8d08beb80e51d3","attributes":{"id":"4694a8892044365aba8d08beb80e51d3","tags":[],"size":{"units":"screen","value":10},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"},"line_color":{"units":"data","value":"#e1e1e1"},"fill_color":{"units":"data","value":"#e1e1e1"}}},{"type":"Circle","id":"416f14e308994284aac7d1635e461d06","attributes":{"id":"416f14e308994284aac7d1635e461d06","tags":[],"size":{"units":"screen","value":10},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":1},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"},"line_color":{"units":"data","field":"line_color"},"fill_color":{"units":"data","field":"fill_color"}}},{"type":"GlyphRenderer","id":"e9b18009d72a5c96f5e9f1ff6f416cb3","attributes":{"id":"e9b18009d72a5c96f5e9f1ff6f416cb3","tags":[],"selection_glyph":null,"nonselection_glyph":{"type":"Circle","id":"4694a8892044365aba8d08beb80e51d3"},"hover_glyph":{"type":"Circle","id":"416f14e308994284aac7d1635e461d06"},"name":null,"data_source":{"type":"ColumnDataSource","id":"f6218510521d446a9dbd1b741e398c16"},"glyph":{"type":"Circle","id":"33c558a48eb09ce5a9f96b8d3fb8c315"}}},{"type":"LinearAxis","id":"93f061eb8f6911c8d05555bfa89468d3","attributes":{"id":"93f061eb8f6911c8d05555bfa89468d3","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"axis_label":"Crude Birth Rate","formatter":{"type":"BasicTickFormatter","id":"4a42f24ddd3d969c47bf76e287ebabe2"},"ticker":{"type":"BasicTicker","id":"cf49ecb7ffc7c10444c6ba4174072361"},"visible":true,"axis_label_text_font_size":"12pt"}},{"type":"BasicTickFormatter","id":"4a42f24ddd3d969c47bf76e287ebabe2","attributes":{"id":"4a42f24ddd3d969c47bf76e287ebabe2","tags":[]}},{"type":"BasicTicker","id":"cf49ecb7ffc7c10444c6ba4174072361","attributes":{"id":"cf49ecb7ffc7c10444c6ba4174072361","tags":[],"num_minor_ticks":5}},{"type":"Grid","id":"57f5d43e50454a243e5eb36fa4305079","attributes":{"id":"57f5d43e50454a243e5eb36fa4305079","tags":[],"dimension":0,"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"ticker":{"type":"BasicTicker","id":"cf49ecb7ffc7c10444c6ba4174072361"}}},{"type":"LinearAxis","id":"abc2e133183da8dd658168f4ea68df97","attributes":{"id":"abc2e133183da8dd658168f4ea68df97","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"axis_label":"Crude Death Rate","formatter":{"type":"BasicTickFormatter","id":"e89bef5b829f4c30c30102e29cf0263e"},"ticker":{"type":"BasicTicker","id":"044b128504674869461ce664d30137b4"},"visible":true,"axis_label_text_font_size":"12pt"}},{"type":"BasicTickFormatter","id":"e89bef5b829f4c30c30102e29cf0263e","attributes":{"id":"e89bef5b829f4c30c30102e29cf0263e","tags":[]}},{"type":"BasicTicker","id":"044b128504674869461ce664d30137b4","attributes":{"id":"044b128504674869461ce664d30137b4","tags":[],"num_minor_ticks":5}},{"type":"Grid","id":"ea117aa9f2a0236fae5887a5ad95f4c9","attributes":{"id":"ea117aa9f2a0236fae5887a5ad95f4c9","tags":[],"dimension":1,"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"ticker":{"type":"BasicTicker","id":"044b128504674869461ce664d30137b4"}}},{"type":"ColumnDataSource","id":"33e1d1a27ad9cb6d07d1e3c25442bfca","attributes":{"id":"33e1d1a27ad9cb6d07d1e3c25442bfca","tags":[],"column_names":["x","y"],"selected":[],"data":{"x":[null,null],"y":[null,null]}}},{"type":"Circle","id":"4b3c4cc368b2733dfd6e1588fe19bb98","attributes":{"id":"4b3c4cc368b2733dfd6e1588fe19bb98","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"line_color":{"units":"data","value":"#1F77B4"},"fill_color":{"units":"data","value":"#1F77B4"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"Circle","id":"d21c9e8560ea5d344f93aea6c754fdad","attributes":{"id":"d21c9e8560ea5d344f93aea6c754fdad","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"line_color":{"units":"data","value":"#e1e1e1"},"fill_color":{"units":"data","value":"#e1e1e1"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"Circle","id":"3da1d95fabe2085910b12fca01de0ce4","attributes":{"id":"3da1d95fabe2085910b12fca01de0ce4","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":1},"line_color":{"units":"data","value":"#1F77B4"},"fill_color":{"units":"data","value":"#1F77B4"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"GlyphRenderer","id":"2b417ac3aaf885bf575503f751ba30b8","attributes":{"id":"2b417ac3aaf885bf575503f751ba30b8","tags":[],"selection_glyph":null,"nonselection_glyph":{"type":"Circle","id":"d21c9e8560ea5d344f93aea6c754fdad"},"hover_glyph":{"type":"Circle","id":"3da1d95fabe2085910b12fca01de0ce4"},"name":null,"data_source":{"type":"ColumnDataSource","id":"33e1d1a27ad9cb6d07d1e3c25442bfca"},"glyph":{"type":"Circle","id":"4b3c4cc368b2733dfd6e1588fe19bb98"}}},{"type":"Circle","id":"48369d2d62486ce719da8774ee7b0071","attributes":{"id":"48369d2d62486ce719da8774ee7b0071","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"line_color":{"units":"data","value":"#FF7F0E"},"fill_color":{"units":"data","value":"#FF7F0E"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"Circle","id":"5f1b391a5e817ed15be7e94c52f87f16","attributes":{"id":"5f1b391a5e817ed15be7e94c52f87f16","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"line_color":{"units":"data","value":"#e1e1e1"},"fill_color":{"units":"data","value":"#e1e1e1"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"Circle","id":"eaf1ebe8ad51a92421ca66a5aa07fd4b","attributes":{"id":"eaf1ebe8ad51a92421ca66a5aa07fd4b","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":1},"line_color":{"units":"data","value":"#FF7F0E"},"fill_color":{"units":"data","value":"#FF7F0E"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"GlyphRenderer","id":"3faffe25431e99808116983ce195fb48","attributes":{"id":"3faffe25431e99808116983ce195fb48","tags":[],"selection_glyph":null,"nonselection_glyph":{"type":"Circle","id":"5f1b391a5e817ed15be7e94c52f87f16"},"hover_glyph":{"type":"Circle","id":"eaf1ebe8ad51a92421ca66a5aa07fd4b"},"name":null,"data_source":{"type":"ColumnDataSource","id":"33e1d1a27ad9cb6d07d1e3c25442bfca"},"glyph":{"type":"Circle","id":"48369d2d62486ce719da8774ee7b0071"}}},{"type":"Circle","id":"9a9364821681329a6a41875cbded5569","attributes":{"id":"9a9364821681329a6a41875cbded5569","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"line_color":{"units":"data","value":"#2CA02C"},"fill_color":{"units":"data","value":"#2CA02C"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"Circle","id":"fffeaa1ca5a84ad57faad202b2ef9fb0","attributes":{"id":"fffeaa1ca5a84ad57faad202b2ef9fb0","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"line_color":{"units":"data","value":"#e1e1e1"},"fill_color":{"units":"data","value":"#e1e1e1"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"Circle","id":"70947e5a0e62fe70954c27af2d1c1125","attributes":{"id":"70947e5a0e62fe70954c27af2d1c1125","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":1},"line_color":{"units":"data","value":"#2CA02C"},"fill_color":{"units":"data","value":"#2CA02C"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"GlyphRenderer","id":"57e1fdab56ec77e64ae8091a80bc29ef","attributes":{"id":"57e1fdab56ec77e64ae8091a80bc29ef","tags":[],"selection_glyph":null,"nonselection_glyph":{"type":"Circle","id":"fffeaa1ca5a84ad57faad202b2ef9fb0"},"hover_glyph":{"type":"Circle","id":"70947e5a0e62fe70954c27af2d1c1125"},"name":null,"data_source":{"type":"ColumnDataSource","id":"33e1d1a27ad9cb6d07d1e3c25442bfca"},"glyph":{"type":"Circle","id":"9a9364821681329a6a41875cbded5569"}}},{"type":"Circle","id":"e6bf4d6ac6477b7cfc88a772b273f902","attributes":{"id":"e6bf4d6ac6477b7cfc88a772b273f902","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"line_color":{"units":"data","value":"#D62728"},"fill_color":{"units":"data","value":"#D62728"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"Circle","id":"429399aa2eaa8bffa9adf690832dc9bb","attributes":{"id":"429399aa2eaa8bffa9adf690832dc9bb","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":0.5},"line_color":{"units":"data","value":"#e1e1e1"},"fill_color":{"units":"data","value":"#e1e1e1"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"Circle","id":"a8137ab2c42bec7b9cc10b2c4e7d3b22","attributes":{"id":"a8137ab2c42bec7b9cc10b2c4e7d3b22","tags":[],"size":{"units":"screen","value":0},"visible":true,"line_alpha":{"units":"data","value":1},"fill_alpha":{"units":"data","value":1},"line_color":{"units":"data","value":"#D62728"},"fill_color":{"units":"data","value":"#D62728"},"x":{"units":"data","field":"x"},"y":{"units":"data","field":"y"}}},{"type":"GlyphRenderer","id":"ea4cc9214babc59e33a9e0e535eb5313","attributes":{"id":"ea4cc9214babc59e33a9e0e535eb5313","tags":[],"selection_glyph":null,"nonselection_glyph":{"type":"Circle","id":"429399aa2eaa8bffa9adf690832dc9bb"},"hover_glyph":{"type":"Circle","id":"a8137ab2c42bec7b9cc10b2c4e7d3b22"},"name":null,"data_source":{"type":"ColumnDataSource","id":"33e1d1a27ad9cb6d07d1e3c25442bfca"},"glyph":{"type":"Circle","id":"e6bf4d6ac6477b7cfc88a772b273f902"}}},{"type":"Legend","id":"f86dee6a2037fe10b38a71858fd0850b","attributes":{"id":"f86dee6a2037fe10b38a71858fd0850b","tags":[],"plot":{"type":"Plot","id":"867cff8f8bff17555b0ae6f0a00d6ab7","subtype":"Figure"},"legends":[["worldbankincomegroup",[]],[" High",[{"type":"GlyphRenderer","id":"2b417ac3aaf885bf575503f751ba30b8"}]],[" Low",[{"type":"GlyphRenderer","id":"3faffe25431e99808116983ce195fb48"}]],[" Lower-middle",[{"type":"GlyphRenderer","id":"57e1fdab56ec77e64ae8091a80bc29ef"}]],[" Upper-middle",[{"type":"GlyphRenderer","id":"ea4cc9214babc59e33a9e0e535eb5313"}]]],"location":"top_right"}},{"type":"Range1d","id":"97c263cb61d0a053b15693a3f2abc631","attributes":{"id":"97c263cb61d0a053b15693a3f2abc631","tags":[],"start":3.797,"end":52.703}},{"type":"Range1d","id":"c7a821bca304fb3a37ebaf4ab1cfcd44","attributes":{"id":"c7a821bca304fb3a37ebaf4ab1cfcd44","tags":[],"start":0.00099999999999989,"end":17.899}}]}}},"debug":false},"evals":[],"jsHooks":[]}</script>
+
 
 ---
 
@@ -1296,44 +829,6 @@ class: inverse, middle, center
 * I'm only listing R packages that are currently available to download and use, appear to be actively maintained and haven't been subsumed by other R packages, produce graphics that can viewed in a web browser locally or embedded in an html document like this one that was produced with knitr and rmarkdown. I'm not going to list anything that requires server-side support from interfaces like Shiny or Rook to be interactive, for example.
 * Many of these produce graphics in SVG, or Scalable Vector Graphics, which is, according to wikipedia, an XML-based vector image format for 2D graphics with support for interactivity and animation.  Not all of them do, though -- for example, googleVis produces some output as Flash.
 
----
-
-# MotionChart with `googleVis`
-
-
-```r
-library(googleVis)
-# for knitr:
-# data.frame with &gt;=4 cols: x, y, id, time. color and size optional,
-# but if you don't provide them,
-# it will choose them for you (if there are columns left to use).
-# Motion Chart only displayed when hosted on a web server
-# or placed in a directory listed in Flash's local trusted sources.
-mc = gvisMotionChart(as.data.frame(
-		subset(who_mort,
-			   !is.na(country)&amp;!is.na(value.maternal),
-			   select = c(country, year, region, worldbankincomegroup, value.infant, value.maternal))),
-	idvar = "country", timevar = "year",
-	xvar = "value.infant", yvar = "value.maternal",
-	colorvar = "worldbankincomegroup",
-	options = list(width = 750, height = 650))
-```
-
-
-```r
-plot(mc) # in an R session, opens in browser
-```
-
-
-
-### &lt;a href="gvis_motion_chart.html" target="_blank"&gt;View visualization in new tab&lt;/a&gt; (Flash-based)
-
-???
-
-* "The googleVis package provides an interface between R and the Google Charts API. Google Charts offer interactive charts which can be embedded into web pages. The best known of these charts is probably the Motion Chart, popularised by Hans Rosling in his TED talks.
-The functions of the googleVis package allow the user to visualise data stored in R data frames with Google Charts without uploading the data to Google. The output of a googleVis function is html code that contains the data and references to JavaScript functions hosted by Google."
-* data.frame with &gt;=4 cols: x, y, id, time. color and size optional, but if you don't provide them, it will choose them for you (if there are columns left to use)
-* by default the html file is saved in a temporary folder. if you have problems with a motion chart not displaying, it may be because of Flash's security settings. You'll need to manually add the directory where the html file is stored to the list of trusted local directories.
 
 ---
 background-image: url('assets/img/dogs.jpg')
@@ -1351,24 +846,7 @@ class: inverse, middle, center
 
 # References
 
-&lt;a name=bib-Wickham_2009&gt;&lt;/a&gt;[[1]](#cite-Wickham_2009) H. Wickham.
-_ggplot2_. Springer Science + Business Media, 2009. URL:
-[http://dx.doi.org/10.1007/978-0-387-98141-3](http://dx.doi.org/10.1007/978-0-387-98141-3).
-
-&lt;a name=bib-Wickham_2010&gt;&lt;/a&gt;[[2]](#cite-Wickham_2010) H. Wickham.
-"A Layered Grammar of Graphics". In: _Journal of Computational and
-Graphical Statistics_ 19.1 (2010), pp. 3-28. URL:
-[http://dx.doi.org/10.1198/jcgs.2009.07098](http://dx.doi.org/10.1198/jcgs.2009.07098).
-
-&lt;a name=bib-Wickham_2014&gt;&lt;/a&gt;[[3]](#cite-Wickham_2014) H. Wickham.
-"Tidy Data". In: _Journal of Statistical Software_ 59.10 (2014).
-URL:
-[http://www.jstatsoft.org/v59/i10](http://www.jstatsoft.org/v59/i10).
-
-&lt;a name=bib-Wilkinson_2005&gt;&lt;/a&gt;[[4]](#cite-Wilkinson_2005) L.
-Wilkinson. _The Grammar of Graphics_. Springer-Verlag New York, .
-URL:
-[http://dx.doi.org/10.1007/0-387-28695-0](http://dx.doi.org/10.1007/0-387-28695-0).
+NULL
 
 ---
 
@@ -1385,40 +863,134 @@ URL:
 
 # Session Info
 
-**R version 3.3.2 (2016-10-31)**
+**R version 4.1.0 (2021-05-18)**
 
-**Platform:** x86_64-apple-darwin13.4.0 (64-bit) 
+**Platform:** x86_64-w64-mingw32/x64 (64-bit) 
 
 
 **attached base packages:** 
-_grid_, _stats_, _graphics_, _grDevices_, _utils_, _datasets_ and _base_
+_stats_, _graphics_, _grDevices_, _utils_, _datasets_, _methods_ and _base_
 
 **other attached packages:** 
-_pander(v.0.6.0)_, _googleVis(v.0.6.2)_, _rbokeh(v.0.5.0)_, _leaflet(v.1.1.0)_, _DT(v.0.2)_, _plotly(v.4.5.6)_, _gdtools(v.0.1.3)_, _ggiraph(v.0.3.2.9000)_, _gtable(v.0.2.0)_, _ggdendro(v.0.1-20)_, _tidyr(v.0.6.1)_, _ggrepel(v.0.6.5)_, _dplyr(v.0.5.0)_, _showtext(v.0.4-6)_, _sysfonts(v.0.5)_, _ggplot2(v.2.2.1)_ and _RefManageR(v.0.13.1)_
+_pander(v.0.6.4)_, _leaflet(v.2.0.4.1)_, _RefManageR(v.1.3.0)_, _showtext(v.0.9-4)_, _showtextdb(v.3.0)_, _sysfonts(v.0.8.5)_, _forcats(v.0.5.1)_, _stringr(v.1.4.0)_, _dplyr(v.1.0.7)_, _purrr(v.0.3.4)_, _readr(v.2.0.1)_, _tidyr(v.1.1.3)_, _tibble(v.3.1.4)_, _ggplot2(v.3.3.5)_ and _tidyverse(v.1.3.1)_
 
 **loaded via a namespace (and not attached):** 
-_Rcpp(v.0.12.9)_, _lubridate(v.1.6.0)_, _lattice(v.0.20-34)_, _assertthat(v.0.1)_, _rprojroot(v.1.2)_, _digest(v.0.6.12)_, _mime(v.0.5)_, _R6(v.2.2.0)_, _plyr(v.1.8.4)_, _backports(v.1.0.5)_, _evaluate(v.0.10)_, _httr(v.1.2.1)_, _xaringan(v.0.2)_, _lazyeval(v.0.2.0)_, _hexbin(v.1.27.1)_, _R.utils(v.2.5.0)_, _R.oo(v.1.21.0)_, _rmarkdown(v.1.3)_, _labeling(v.0.3)_, _stringr(v.1.2.0)_, _htmlwidgets(v.0.8)_, _RCurl(v.1.95-4.8)_, _munsell(v.0.4.3)_, _shiny(v.1.0.0)_, _httpuv(v.1.3.3)_, _gistr(v.0.3.6)_, _base64enc(v.0.1-3)_, _rvg(v.0.1.3)_, _htmltools(v.0.3.5)_, _tibble(v.1.2)_, _gridExtra(v.2.2.1)_, _codetools(v.0.2-15)_, _XML(v.3.98-1.5)_, _viridisLite(v.0.1.3)_, _showtextdb(v.1.0)_, _MASS(v.7.3-45)_, _bitops(v.1.0-6)_, _R.methodsS3(v.1.7.1)_, _jsonlite(v.1.3)_, _xtable(v.1.8-2)_, _DBI(v.0.6)_, _magrittr(v.1.5)_, _scales(v.0.4.1)_, _bibtex(v.0.4.0)_, _stringi(v.1.1.2)_, _pryr(v.0.1.2)_, _viridis(v.0.3.4)_, _xml2(v.1.1.1)_, _RColorBrewer(v.1.1-2)_, _tools(v.3.3.2)_, _RJSONIO(v.1.3-0)_, _officer(v.0.1.1)_, _purrr(v.0.2.2)_, _maps(v.3.1.1)_, _crosstalk(v.1.0.0)_, _yaml(v.2.1.14)_, _colorspace(v.1.3-2)_, _knitr(v.1.15.1)_ and _methods(v.3.3.2)_
+_Rcpp(v.1.0.7)_, _lubridate(v.1.7.10)_, _leaflet.providers(v.1.9.0)_, _assertthat(v.0.2.1)_, _digest(v.0.6.27)_, _utf8(v.1.2.2)_, _R6(v.2.5.1)_, _cellranger(v.1.1.0)_, _plyr(v.1.8.6)_, _backports(v.1.2.1)_, _reprex(v.2.0.1)_, _evaluate(v.0.14)_, _httr(v.1.4.2)_, _xaringan(v.0.22)_, _pillar(v.1.6.2)_, _rlang(v.0.4.11)_, _readxl(v.1.3.1)_, _rstudioapi(v.0.13)_, _jquerylib(v.0.1.4)_, _rmarkdown(v.2.10)_, _htmlwidgets(v.1.5.3)_, _munsell(v.0.5.0)_, _broom(v.0.7.9)_, _compiler(v.4.1.0)_, _modelr(v.0.1.8)_, _xfun(v.0.25)_, _pkgconfig(v.2.0.3)_, _htmltools(v.0.5.1.1)_, _tidyselect(v.1.1.1)_, _fansi(v.0.5.0)_, _crayon(v.1.4.1)_, _tzdb(v.0.1.2)_, _dbplyr(v.2.1.1)_, _withr(v.2.4.2)_, _grid(v.4.1.0)_, _jsonlite(v.1.7.2)_, _gtable(v.0.3.0)_, _lifecycle(v.1.0.0)_, _DBI(v.1.1.1)_, _magrittr(v.2.0.1)_, _scales(v.1.1.1)_, _cli(v.3.0.1)_, _stringi(v.1.7.3)_, _fs(v.1.5.0)_, _xml2(v.1.3.2)_, _bslib(v.0.2.5.1)_, _ellipsis(v.0.3.2)_, _generics(v.0.1.0)_, _vctrs(v.0.3.8)_, _tools(v.4.1.0)_, _glue(v.1.4.2)_, _crosstalk(v.1.1.1)_, _hms(v.1.1.0)_, _yaml(v.2.2.1)_, _colorspace(v.2.0-2)_, _rvest(v.1.0.1)_, _knitr(v.1.33)_, _haven(v.2.4.3)_ and _sass(v.0.4.0)_
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "tomorrow-night-eighties",
 "highlightLines": true
 });
-if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-  }
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
 });
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
